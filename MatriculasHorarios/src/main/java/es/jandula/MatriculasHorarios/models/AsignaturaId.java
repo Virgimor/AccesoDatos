@@ -2,8 +2,15 @@ package es.jandula.MatriculasHorarios.models;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Embeddable
 public class AsignaturaId implements Serializable{
 
@@ -14,51 +21,13 @@ public class AsignaturaId implements Serializable{
 	
 	private int curso;
 	
+	@Column(length = 50)
 	private String etapa;
 	
+	@Column(length = 2)
 	private String grupo;
 	
+	@Column(length = 100)
 	private String nombre;
-
-	public AsignaturaId() {
-		super();
-	}
-
-	public int getCurso() {
-		return curso;
-	}
-
-	public void setCurso(int curso) {
-		this.curso = curso;
-	}
-
-
-	public String getEtapa() {
-		return etapa;
-	}
-
-	public void setEtapa(String etapa) {
-		this.etapa = etapa;
-	}
-
-	public String getGrupo() {
-		return grupo;
-	}
-
-	public void setGrupo(String grupo) {
-		this.grupo = grupo;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 }

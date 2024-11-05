@@ -1,7 +1,8 @@
 package es.jandula.MatriculasHorarios.models;
 
-import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,10 +12,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Curso_etapa")
-public class CursoEtapa {
+@Table(name = "Bloque")
+public class Bloque {
 	
-	@EmbeddedId
-	private CursoEtapaId cursoEtapaId;
+	@Id
+	@Column(length = 100, nullable = false)
+	private String id;
 
 }

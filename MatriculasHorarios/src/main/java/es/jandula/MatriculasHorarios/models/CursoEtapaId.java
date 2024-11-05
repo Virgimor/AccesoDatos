@@ -3,6 +3,13 @@ package es.jandula.MatriculasHorarios.models;
 import java.io.Serializable;
 
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Embeddable
 public class CursoEtapaId implements Serializable{
 
@@ -14,28 +21,5 @@ public class CursoEtapaId implements Serializable{
 	private Integer curso;
 	
 	private String etapa;
-	
-
-	public CursoEtapaId() {
-		super();
-	}
-
-	public Integer getCurso() {
-		return curso;
-	}
-
-	public void setCurso(Integer curso) {
-		this.curso = curso;
-	}
-
-	public String getEtapa() {
-		return etapa;
-	}
-
-	public void setEtapa(String etapa) {
-		this.etapa = etapa;
-	}
-	
-	
 
 }
