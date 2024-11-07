@@ -2,8 +2,10 @@ package es.jandula.MatriculasHorarios.models;
 
 import java.io.Serializable;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,19 +21,18 @@ public class MatriculaId implements Serializable{
 	 */
 	private static final long serialVersionUID = -8190860470095335301L;
 	
-	@Column(name = "asignatura_curso", insertable=false, updatable=false)
-	private int asignaturaCurso;
+	@ManyToOne
+	@JoinColumns({
+		@JoinColumn(name = "asignatura_curso", referencedColumnName = "curso"),
+		@JoinColumn(name = "asignatura_etapa", referencedColumnName = "etapa"),
+		@JoinColumn(name = "asignatura_grupo", referencedColumnName = "grupo"),
+		@JoinColumn(name = "asignatura_nombre", referencedColumnName = "nombre")
+	})
+	private Asignatura asignatura;
 	
-	@Column(name = "asignatura_etapa",length = 50, insertable=false, updatable=false)
-	private String asignaturaEtapa;
-	
-	@Column(name = "asignatura_grupo" ,length = 2, insertable=false, updatable=false)
-	private String asignaturaGrupo;
-	
-	@Column(name = "asignatura_nombre" ,length = 100, insertable=false, updatable=false)
-	private String asignaturaNombre;
-	
-	private int alumnoId;
+	@ManyToOne
+	@JoinColumn(name = "alumno_id", referencedColumnName = "id")
+	private Alumno alumnoId;
 
 
 }

@@ -1,8 +1,11 @@
-package es.jandula.MatriculasHorarios.models;
+package ies.jandula.universidad.models;
+
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,15 +14,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Alumno {
+public class Departamento {
 	
 	@Id
-	private int id;
+	@Column(length=10)
+	private Long id;
 	
-	@Column(length = 50, nullable = false)
+	@Column(length=45)
 	private String nombre;
 	
-	@Column(length = 100, nullable = false)
-	private String apellidos;
+	@OneToMany(mappedBy="idDepartamento")
+	private List<Profesor> profesor;
+
 
 }
