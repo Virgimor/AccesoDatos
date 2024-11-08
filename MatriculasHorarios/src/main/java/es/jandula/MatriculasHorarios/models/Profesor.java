@@ -1,12 +1,14 @@
 package es.jandula.MatriculasHorarios.models;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,11 +17,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Datos_bruto_alumno_matricula")
-public class DatosBrutoAlumnoMatricula {
+public class Profesor {
 	
 	@Id
-	private Integer id;
+	@Column(length = 100)
+	private String email;
 	
 	@Column(length = 50, nullable = false)
 	private String nombre;
@@ -27,15 +29,12 @@ public class DatosBrutoAlumnoMatricula {
 	@Column(length = 100, nullable = false)
 	private String apellidos;
 	
-	@Column(length = 100, nullable = false)
-	private String asignatura;
 	
 	@ManyToOne
-	@JoinColumns({
-		@JoinColumn(name = "curso", referencedColumnName = "curso"),
-		@JoinColumn(name = "etapa", referencedColumnName = "etapa"),
-	})
-	private CursoEtapa cursoEtapa;	
+	@JoinColumn(name = "departamento_nombre", referencedColumnName = "nombre")
+	private Departamento departamento;
 	
+	//@OneToMany(mappedBy = "profesor")
+	//private List<ProfesorReduccionId> profesorReduccionId;
 
 }

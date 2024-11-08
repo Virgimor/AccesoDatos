@@ -30,10 +30,10 @@ public class Asignatura {
 	@Column
 	private int curso;
 	
-	@Column(length = 80)
+	@Column(length = 80, nullable = false)
 	private String nombre;
 	
-	@Column(length = 45)
+	@Column(length = 45, nullable = false)
 	private String tipo;
 	
 	@ManyToOne

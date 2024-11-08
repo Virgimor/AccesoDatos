@@ -22,16 +22,16 @@ public class Profesor {
 	@Column(length = 10)
 	private Long id;
 	
-	@Column(length = 45)
+	@Column(length = 45, nullable = false)
 	private String apellido1;
 	
 	@Column(length = 45)
 	private String apellido2;
 	
-	@Column(length = 45)
+	@Column(length = 45, nullable = false)
 	private String ciudad;
 	
-	@Column(length = 45)
+	@Column(length = 45, nullable = false)
 	private String direccion;
 	
 	@Column(nullable = false)
@@ -40,10 +40,10 @@ public class Profesor {
 	@Column(length = 45)
 	private String nif;
 	
-	@Column(length = 45)
+	@Column(length = 45, nullable = false)
 	private String nombre;
 	
-	@Column(length = 45)
+	@Column(length = 45, nullable = false)
 	private String sexo;
 	
 	@Column(length = 45)
