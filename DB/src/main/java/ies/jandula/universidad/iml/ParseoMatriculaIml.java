@@ -45,13 +45,13 @@ public class ParseoMatriculaIml implements IParseoMatricula{
 			
 			Matricula matricula = new Matricula();
 			
-			Optional<Alumno> optionaAlumno = this.alumnoRepository.findById(Long.valueOf(lineaDelFicheroTroceada[0]));
+			Optional<Alumno> optionaAlumno = this.alumnoRepository.findById(Integer.valueOf(lineaDelFicheroTroceada[0]));
 			matricula.setIdAlumno(optionaAlumno.get());
 			
-			Optional<Asignatura> optionalAsignatura = this.asignaturaRepository.findById(Long.valueOf(lineaDelFicheroTroceada[1]));
+			Optional<Asignatura> optionalAsignatura = this.asignaturaRepository.findById(Integer.valueOf(lineaDelFicheroTroceada[1]));
 			matricula.setIdAsignatura(optionalAsignatura.get());
 			
-			Optional<Curso> optionalCurso = this.cursoRepository.findById(Long.valueOf(lineaDelFicheroTroceada[2]));
+			Optional<Curso> optionalCurso = this.cursoRepository.findById(Integer.valueOf(lineaDelFicheroTroceada[2]));
 			matricula.setIdCurso(optionalCurso.get());
 			
 			this.matriculaRepository.saveAndFlush(matricula);

@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import ies.jandula.universidad.models.Alumno;
 
-public interface AlumnoRepository extends JpaRepository<Alumno, Long>{
+public interface AlumnoRepository extends JpaRepository<Alumno, Integer>{
 	
 	/*
 	 * siendo "Alumno" el nombre de la entidad y 

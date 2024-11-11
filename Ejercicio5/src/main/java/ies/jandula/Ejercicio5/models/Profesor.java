@@ -20,6 +20,9 @@ public class Profesor {
 	@Column(nullable = false)
 	private Integer idProfesor;
 	
+	@Column(length = 9, unique = true)
+	private String dni;
+	
 	@Column(length = 50, nullable = false)
 	private String nombre;
 	

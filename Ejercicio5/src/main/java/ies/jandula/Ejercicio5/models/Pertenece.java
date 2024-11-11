@@ -1,6 +1,5 @@
 package ies.jandula.Ejercicio5.models;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -18,9 +17,6 @@ public class Pertenece {
 	
 	@EmbeddedId
 	private PerteneceId perteneceId;
-	
-	@Column(length = 10, nullable = false)
-	private String curso;
 	
 	@ManyToOne
 	@MapsId("numMatricula")
