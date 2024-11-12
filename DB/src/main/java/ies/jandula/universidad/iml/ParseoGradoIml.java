@@ -29,7 +29,7 @@ public class ParseoGradoIml implements IParseoGrado{
 			
 			Grado grado = new Grado();
 			
-			grado.setId(Long.valueOf(lineaDelFicheroTroceada[0]));
+			grado.setId(Integer.valueOf(lineaDelFicheroTroceada[0]));
 			grado.setNombre(lineaDelFicheroTroceada[1]);
 			
 			this.gradoRepository.saveAndFlush(grado);

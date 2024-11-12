@@ -29,7 +29,7 @@ public class ParseoCursoIml implements IParseoCurso{
 			
 			Curso curso = new Curso();
 			
-			curso.setId(Long.valueOf(lineaDelFicheroTroceada[0]));
+			curso.setId(Integer.valueOf(lineaDelFicheroTroceada[0]));
 			curso.setAnyoInicio(Integer.valueOf(lineaDelFicheroTroceada[1]));
 			curso.setAnyoFin(Integer.valueOf(lineaDelFicheroTroceada[2]));
 			

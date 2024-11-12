@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ies.jandula.Ejercicio4.exception.Ejercicio4Excepcion;
 import ies.jandula.Ejercicio4.interfaces.IParseoLocalidad;
@@ -12,6 +13,7 @@ import ies.jandula.Ejercicio4.models.Provincia;
 import ies.jandula.Ejercicio4.repository.LocalidadRepository;
 import ies.jandula.Ejercicio4.repository.ProvinciaRepository;
 
+@Service
 public class ParseoLocalidadIml implements IParseoLocalidad{
 	
 	@Autowired

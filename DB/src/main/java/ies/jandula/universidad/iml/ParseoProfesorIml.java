@@ -37,7 +37,7 @@ public class ParseoProfesorIml implements IParseoProfesor{
 			
 			Profesor profesor = new Profesor();
 			
-			profesor.setId(Long.valueOf(lineaDelFicheroTroceada[0]));
+			profesor.setId(Integer.valueOf(lineaDelFicheroTroceada[0]));
 			profesor.setNif(lineaDelFicheroTroceada[1]);
 			profesor.setNombre(lineaDelFicheroTroceada[2]);
 			profesor.setApellido1(lineaDelFicheroTroceada[3]);
@@ -53,7 +53,7 @@ public class ParseoProfesorIml implements IParseoProfesor{
 			}
 			profesor.setSexo(lineaDelFicheroTroceada[9]);
 			
-			Optional<Departamento> optionalDepartamento = this.departamentoRepository.findById(Long.valueOf(lineaDelFicheroTroceada[10]));
+			Optional<Departamento> optionalDepartamento = this.departamentoRepository.findById(Integer.valueOf(lineaDelFicheroTroceada[10]));
 			profesor.setIdDepartamento(optionalDepartamento.get());
 			
 			this.profesorRepository.saveAndFlush(profesor);

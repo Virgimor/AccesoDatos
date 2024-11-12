@@ -18,7 +18,7 @@ public class Grado {
 	
 	@Id
 	@Column(length = 10)
-	private Long id;
+	private Integer id;
 	
 	@Column(length = 100)
 	private String nombre;

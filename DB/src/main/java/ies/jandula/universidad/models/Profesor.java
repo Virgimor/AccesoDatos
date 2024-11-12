@@ -20,7 +20,7 @@ public class Profesor {
 	
 	@Id
 	@Column(length = 10)
-	private Long id;
+	private Integer id;
 	
 	@Column(length = 45, nullable = false)
 	private String apellido1;

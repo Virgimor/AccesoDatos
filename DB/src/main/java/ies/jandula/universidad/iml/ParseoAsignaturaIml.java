@@ -40,17 +40,17 @@ public class ParseoAsignaturaIml implements IParseoAsignatura{
 			
 			Asignatura asignatura = new Asignatura();
 			
-			asignatura.setId(Long.valueOf(lineaDelFicheroTroceada[0]));
+			asignatura.setId(Integer.valueOf(lineaDelFicheroTroceada[0]));
 			asignatura.setNombre(lineaDelFicheroTroceada[1]);
 			asignatura.setCreditos(Double.valueOf(lineaDelFicheroTroceada[2]));
 			asignatura.setTipo(lineaDelFicheroTroceada[3]);
 			asignatura.setCurso(Integer.valueOf(lineaDelFicheroTroceada[4]));
 			asignatura.setCuatrimestre(Integer.valueOf(lineaDelFicheroTroceada[5]));
 			
-			Optional<Profesor> optionalProfesor = this.profesorRepository.findById(Long.valueOf(lineaDelFicheroTroceada[6]));
+			Optional<Profesor> optionalProfesor = this.profesorRepository.findById(Integer.valueOf(lineaDelFicheroTroceada[6]));
 			asignatura.setIdProfesor(optionalProfesor.get());
 			
-			Optional<Grado> optionalGrado = this.gradoRepository.findById(Long.valueOf(lineaDelFicheroTroceada[7]));
+			Optional<Grado> optionalGrado = this.gradoRepository.findById(Integer.valueOf(lineaDelFicheroTroceada[7]));
 			asignatura.setIdGrado(optionalGrado.get());
 			
 			this.asignaturaRepository.saveAndFlush(asignatura);

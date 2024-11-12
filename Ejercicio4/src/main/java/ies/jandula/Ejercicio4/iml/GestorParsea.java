@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ies.jandula.Ejercicio4.costantes.Costantes;
 import ies.jandula.Ejercicio4.exception.Ejercicio4Excepcion;
@@ -15,6 +16,7 @@ import ies.jandula.Ejercicio4.interfaces.IParseoLocalidad;
 import ies.jandula.Ejercicio4.interfaces.IParseoProvincia;
 import ies.jandula.Ejercicio4.interfaces.IParseoRegion;
 
+@Service
 public class GestorParsea implements IGestorParseo{
 	
 	@Autowired

@@ -3,12 +3,14 @@ package ies.jandula.Ejercicio4.iml;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ies.jandula.Ejercicio4.exception.Ejercicio4Excepcion;
 import ies.jandula.Ejercicio4.interfaces.IParseoRegion;
 import ies.jandula.Ejercicio4.models.Region;
 import ies.jandula.Ejercicio4.repository.RegionRepository;
 
+@Service
 public class ParseoRegionIml implements IParseoRegion{
 	
 	@Autowired

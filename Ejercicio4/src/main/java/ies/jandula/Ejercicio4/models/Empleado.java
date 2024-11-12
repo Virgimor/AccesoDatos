@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class Empleado {
 	
 	@EmbeddedId
-	private EmpleadoId empleadoId;
+	private EmpleadoId empleadoId = new EmpleadoId();
 	
 	@Column(length = 100, nullable = false)
 	private String nombre;

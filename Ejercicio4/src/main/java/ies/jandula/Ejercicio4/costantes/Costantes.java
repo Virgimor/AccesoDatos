@@ -7,5 +7,7 @@ public class Costantes {
 	public static final String FICHERO_PROVINCIA = "provincia.csv";
 	
 	public static final String FICHERO_REGION = "region.csv";
+	
+	public static final String FICHERO_EMPLEADOS = "empleados.csv";
 
 }

@@ -18,7 +18,7 @@ public class Curso {
 	
 	@Id
 	@Column(length = 10)
-	private Long id;
+	private Integer id;
 	
 	@Column
 	private int anyoFin;

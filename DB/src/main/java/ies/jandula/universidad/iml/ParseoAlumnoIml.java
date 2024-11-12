@@ -29,7 +29,7 @@ public class ParseoAlumnoIml implements IParseoAlumno{
 			String[] lineaDelFicheroTroceada = lineaDelFichero.split(",");			
 			
 			Alumno alumno = new Alumno();
-			alumno.setId(Long.valueOf(lineaDelFicheroTroceada[0]));
+			alumno.setId(Integer.valueOf(lineaDelFicheroTroceada[0]));
 			alumno.setNif(lineaDelFicheroTroceada[1]);
 			alumno.setNombre(lineaDelFicheroTroceada[2]);
 			alumno.setApellido1(lineaDelFicheroTroceada[3]);

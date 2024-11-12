@@ -18,7 +18,7 @@ public class Departamento {
 	
 	@Id
 	@Column(length=10)
-	private Long id;
+	private Integer id;
 	
 	@Column(length=45)
 	private String nombre;

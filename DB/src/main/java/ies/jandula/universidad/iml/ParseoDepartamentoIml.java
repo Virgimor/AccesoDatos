@@ -29,7 +29,7 @@ public class ParseoDepartamentoIml implements IParseoDepartamento{
 			
 			Departamento departamento = new Departamento();
 			
-			departamento.setId(Long.valueOf(lineaDelFicheroTroceada[0]));
+			departamento.setId(Integer.valueOf(lineaDelFicheroTroceada[0]));
 			departamento.setNombre(lineaDelFicheroTroceada[1]);
 			
 			this.departamentoRepository.saveAndFlush(departamento);
