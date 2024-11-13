@@ -17,6 +17,8 @@ import ies.jandula.universidad.utils.DatesUtil;
 @Service
 public class ParseoProfesorIml implements IParseoProfesor{
 	
+	
+	
 	@Autowired
 	private ProfesorRepository profesorRepository;
 	
@@ -54,6 +56,14 @@ public class ParseoProfesorIml implements IParseoProfesor{
 			profesor.setSexo(lineaDelFicheroTroceada[9]);
 			
 			Optional<Departamento> optionalDepartamento = this.departamentoRepository.findById(Integer.valueOf(lineaDelFicheroTroceada[10]));
+			
+			if(!optionalDepartamento.isPresent()) {
+				
+				//log.error("no existe el departamento");
+				//thow new UniversidadException(1, "algo");
+				
+			}
+			
 			profesor.setIdDepartamento(optionalDepartamento.get());
 			
 			this.profesorRepository.saveAndFlush(profesor);
