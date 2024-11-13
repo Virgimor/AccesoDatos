@@ -21,7 +21,7 @@ public class PerteneceId implements Serializable{/**
 	
 	private int codigoAsignatura;
 	
-	private String curso;
+	
 	
 	
 

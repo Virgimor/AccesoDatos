@@ -6,5 +6,7 @@ import ies.jandula.Ejercicio4.models.Empleado;
 import ies.jandula.Ejercicio4.models.EmpleadoId;
 
 public interface EmpleadosRepository extends JpaRepository<Empleado, EmpleadoId>{
+	
+	Empleado findByIdEmpleadoAndDniEmpleado(Integer idEmpleado, String dniEmpleado);
 
 }

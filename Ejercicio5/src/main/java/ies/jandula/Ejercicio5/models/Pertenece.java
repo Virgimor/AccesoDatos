@@ -1,22 +1,21 @@
 package ies.jandula.Ejercicio5.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Pertenece {
 	
 	@EmbeddedId
-	private PerteneceId perteneceId;
+	private PerteneceId perteneceId = new PerteneceId();
 	
 	@ManyToOne
 	@MapsId("numMatricula")
@@ -27,6 +26,9 @@ public class Pertenece {
 	@MapsId("codigoAsignatura")
 	@JoinColumn(name = "codigo_asignatura_asignatura")
 	private Asignatura asignatura;
+	
+	@Column(length = 20, nullable = false)
+	private String curso;
 	
 
 }

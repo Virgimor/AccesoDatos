@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import ies.jandula.Ejercicio4.costantes.Costantes;
 import ies.jandula.Ejercicio4.exception.Ejercicio4Excepcion;
 import ies.jandula.Ejercicio4.interfaces.IGestorParseo;
+import ies.jandula.Ejercicio4.interfaces.IParseoEmpeados;
 import ies.jandula.Ejercicio4.interfaces.IParseoLocalidad;
 import ies.jandula.Ejercicio4.interfaces.IParseoProvincia;
 import ies.jandula.Ejercicio4.interfaces.IParseoRegion;
@@ -27,6 +28,9 @@ public class GestorParsea implements IGestorParseo{
 	
 	@Autowired
 	private IParseoRegion iParseoRegion;
+	
+	@Autowired
+	private IParseoEmpeados iParseoEmpeados;
 
 	@Override
 	public void parseaFichero(String nombreFichero) throws Ejercicio4Excepcion {
@@ -56,6 +60,14 @@ public class GestorParsea implements IGestorParseo{
 				
 				scannerRegion.close();
 				break;
+			
+			case Costantes.FICHERO_EMPLEADOS:
+				Scanner scannerEmpleado = this.abrirFichero(nombreFichero);
+				
+				this.iParseoEmpeados.parseaFichero(scannerEmpleado);
+				
+				scannerEmpleado.close();
+				break;
 				
 			default:
 				throw new Ejercicio4Excepcion("Unexpected value: " + nombreFichero);
@@ -79,9 +91,9 @@ public class GestorParsea implements IGestorParseo{
 		private Scanner abrirFichero(String nombreFichero) throws Ejercicio4Excepcion{
 			try
 			{
-				// Get file from resource
+				// Get file from resource Coje el fichero de la clase anterior
 				File fichero = this.getFileFromResource(nombreFichero) ;
-				
+				//Devuelve el fechero escaneado
 				return new Scanner(fichero) ;
 			}
 			catch (FileNotFoundException fileNotFoundException)

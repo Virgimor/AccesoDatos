@@ -25,7 +25,7 @@ public class Matricula {
 	 */
 	
 	@EmbeddedId
-	private MatriculaId matriculaId;
+	private MatriculaId matriculaId = new MatriculaId();
 	
 	@ManyToOne
 	@JoinColumn(name="id_alumno")
