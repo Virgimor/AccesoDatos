@@ -1,7 +1,5 @@
 package ies.jandula.Ejercicio4;
 
-import java.io.File;
-import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

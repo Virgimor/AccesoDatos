@@ -13,11 +13,11 @@ import ies.jandula.universidad.models.Profesor;
 import ies.jandula.universidad.repository.DepartamentoRepository;
 import ies.jandula.universidad.repository.ProfesorRepository;
 import ies.jandula.universidad.utils.DatesUtil;
+import lombok.extern.log4j.Log4j2;
 
 @Service
+@Log4j2
 public class ParseoProfesorIml implements IParseoProfesor{
-	
-	
 	
 	@Autowired
 	private ProfesorRepository profesorRepository;
@@ -26,7 +26,7 @@ public class ParseoProfesorIml implements IParseoProfesor{
 	private DepartamentoRepository departamentoRepository;
 
 	@Override
-	public void parseaFichero(Scanner scanner) {
+	public void parseaFichero(Scanner scanner) throws UniversidadException {
 		// TODO Auto-generated method stub
 		
 		scanner.nextLine();
@@ -59,8 +59,9 @@ public class ParseoProfesorIml implements IParseoProfesor{
 			
 			if(!optionalDepartamento.isPresent()) {
 				
-				//log.error("no existe el departamento");
-				//thow new UniversidadException(1, "algo");
+				UniversidadException universidadException= new UniversidadException();
+				log.error("No existe el departamento");
+				throw new UniversidadException("2", universidadException);
 				
 			}
 			
