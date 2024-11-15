@@ -17,7 +17,7 @@ public class EmpleadoId implements Serializable{/**
 	 */
 	private static final long serialVersionUID = 1205339145799537775L;
 	
-	private int idEmpleado;
+	private Integer idEmpleado;
 	
 	@Column(length = 9)
 	private String dniEmpleado;

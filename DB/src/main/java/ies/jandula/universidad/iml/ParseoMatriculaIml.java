@@ -6,6 +6,7 @@ import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ies.jandula.universidad.exception.UniversidadException;
 import ies.jandula.universidad.interfaces.IParseoMatricula;
 import ies.jandula.universidad.models.Alumno;
 import ies.jandula.universidad.models.Asignatura;
@@ -32,7 +33,7 @@ public class ParseoMatriculaIml implements IParseoMatricula{
 	private CursoRepository cursoRepository;
 
 	@Override
-	public void parseaFichero(Scanner scanner) {
+	public void parseaFichero(Scanner scanner) throws UniversidadException {
 		// TODO Auto-generated method stub
 		
 		scanner.nextLine();
@@ -46,6 +47,9 @@ public class ParseoMatriculaIml implements IParseoMatricula{
 			Matricula matricula = new Matricula();
 			
 			Optional<Alumno> optionaAlumno = this.alumnoRepository.findById(Integer.valueOf(lineaDelFicheroTroceada[0]));
+			if(!optionaAlumno.isPresent()) {
+				throw new UniversidadException("Error al encontrar el alumno");
+			}
 			matricula.setIdAlumno(optionaAlumno.get());
 			
 			Optional<Asignatura> optionalAsignatura = this.asignaturaRepository.findById(Integer.valueOf(lineaDelFicheroTroceada[1]));

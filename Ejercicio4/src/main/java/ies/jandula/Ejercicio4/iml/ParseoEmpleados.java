@@ -35,15 +35,16 @@ public class ParseoEmpleados implements IParseoEmpeados{
 			
 			String[] lineaDelFicheroTroceada = lineaDelFichero.split(",");
 			
+			String dniEmpleado = String.valueOf(lineaDelFicheroTroceada[0]);
+			Integer idEmpleado = Integer.valueOf(lineaDelFicheroTroceada[1]);
+			
 			Empleado empleados = new Empleado();
-			EmpleadoId empleadoId = new EmpleadoId();
+			EmpleadoId empleadoId = new EmpleadoId(idEmpleado, dniEmpleado);
 			
-			empleadoId.setDniEmpleado(lineaDelFicheroTroceada[0]);
-			empleadoId.setIdEmpleado(Integer.valueOf(lineaDelFicheroTroceada[1]));
+			empleadoId.setDniEmpleado(dniEmpleado);
+			empleadoId.setIdEmpleado(idEmpleado);
 			
-			Optional<EmpleadoId> optionalIdEmpleado = this.empleadosRepository.findByIdEmpleadoAndDniEmpleado(empleadoId.setDniEmpleado(lineaDelFicheroTroceada[0]), empleadoId.setIdEmpleado(Integer.valueOf(lineaDelFicheroTroceada[1]));
-			
-			empleados.setEmpleadoId(optionalIdEmpleado);
+			empleados.setEmpleadoId(empleadoId);
 			empleados.setNombre(lineaDelFicheroTroceada[2]);
 			empleados.setTelefono(Integer.valueOf(lineaDelFicheroTroceada[3]));
 			empleados.setSalario(Double.valueOf(lineaDelFicheroTroceada[4]));
