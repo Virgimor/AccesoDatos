@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/concesionario?createDatabaseIfNotExist=true
     username: root
-    password: toor
+    password: 123456Aa-
   hikari:
     connection_timeout: 60000
     maximum-pool-size: 5

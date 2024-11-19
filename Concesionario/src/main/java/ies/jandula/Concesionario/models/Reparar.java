@@ -17,9 +17,9 @@ public class Reparar {
 	private RepararId repararId;
 	
 	@ManyToOne
-	@MapsId("nifCliente")
-	@JoinColumn(name = "nif_cliente")
-	private Cliente nifCliente;
+	@MapsId("matriculaCoche")
+	@JoinColumn(name = "matricula_coche")
+	private Coche matriculaCoche;
 	
 	@ManyToOne
 	@MapsId("dniMecanico")

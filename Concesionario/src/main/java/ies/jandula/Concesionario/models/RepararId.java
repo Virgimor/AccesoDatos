@@ -16,7 +16,7 @@ public class RepararId implements Serializable{
 	 */
 	private static final long serialVersionUID = 264055639328062746L;
 	
-	private String nifCliente;
+	private String matriculaCoche;
 	
 	private String dniMecanico;
 
