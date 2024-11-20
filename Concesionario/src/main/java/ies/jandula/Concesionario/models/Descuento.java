@@ -2,8 +2,8 @@ package ies.jandula.Concesionario.models;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-public class Sortea {
+public class Descuento {
 	
-	@Id
-	private Integer anioSorteo;
+	@EmbeddedId
+	private DescuentoId descuentoId;
 	
 	@Column
 	private Double importeDescuento;

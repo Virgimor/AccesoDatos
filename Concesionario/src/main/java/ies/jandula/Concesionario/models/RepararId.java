@@ -1,6 +1,7 @@
 package ies.jandula.Concesionario.models;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import jakarta.persistence.Embeddable;
 import lombok.Data;
@@ -19,5 +20,7 @@ public class RepararId implements Serializable{
 	private String matriculaCoche;
 	
 	private String dniMecanico;
+	
+	private Date fechaReparacion;
 
 }

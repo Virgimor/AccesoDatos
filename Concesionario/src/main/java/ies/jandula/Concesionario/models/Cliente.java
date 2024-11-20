@@ -6,6 +6,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -33,5 +34,6 @@ public class Cliente {
 	@OneToMany(mappedBy = "cliente")
 	private List<Coche> coches;
 	
-
+	@OneToOne(mappedBy = "nifCliente")
+	private Descuento descuento;
 }

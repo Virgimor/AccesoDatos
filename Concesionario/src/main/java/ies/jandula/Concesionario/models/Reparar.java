@@ -1,5 +1,6 @@
 package ies.jandula.Concesionario.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -25,5 +26,8 @@ public class Reparar {
 	@MapsId("dniMecanico")
 	@JoinColumn(name = "dni_mecanico")
 	private Mecanico dniMecanico;
+	
+	@Column(nullable = false)
+	private Double horasEnArreglar;
 
 }
