@@ -1,0 +1,6 @@
+matricula,color,marca,modelo,cliente_id,kilometrosRecorridos
+1234XYZ,Rojo,Toyota,Corolla,1,45000.5
+5678ABC,Azul,Ford,Focus,2,50000.0
+9101DEF,Negro,BMW,Serie 3,3,32000.3
+2345GHI,Blanco,Hyundai,i30,4,15000.0
+6789JKL,Verde,Volkswagen,Golf,5,67000.8
