@@ -1,5 +1,9 @@
 package ies.jandula.Concesionario.interfaces;
 
-public interface IParseoCoche extends IParseo{
+import ies.jandula.Concesionario.models.Coche;
+
+public interface IParseoCoche {
+	
+	public Coche parsearCoche(String[] valores);
 
 }

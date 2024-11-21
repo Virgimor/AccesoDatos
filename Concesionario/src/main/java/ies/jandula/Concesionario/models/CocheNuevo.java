@@ -14,5 +14,9 @@ public class CocheNuevo extends Coche{
 	
 	@Column
 	private Integer unidadesExistentes;	
+	
+	public CocheNuevo(Coche coche) {
+		super(coche);
+	}
 
 }

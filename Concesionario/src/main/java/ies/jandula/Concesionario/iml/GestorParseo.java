@@ -55,14 +55,6 @@ public class GestorParseo implements IGestorParseo{
 				scannerCliente.close();
 				break;
 				
-			case Costantes.FICHERO_COCHE:
-				Scanner scannerCoche = this.abrirFichero(nombreFichero);
-				
-				this.iParseoCoche.parsearFichero(scannerCoche);
-				
-				scannerCoche.close();
-				break;
-				
 			/*case Costantes.FICHERO_COCHE_NUEVO:
 				Scanner scannerCocheNuevo = this.abrirFichero(nombreFichero);
 				

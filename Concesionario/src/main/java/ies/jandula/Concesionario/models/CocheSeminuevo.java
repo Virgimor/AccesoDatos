@@ -14,5 +14,9 @@ public class CocheSeminuevo extends Coche{
 	
 	@Column
 	private Double kilometrosRecorridos;
+	
+	public CocheSeminuevo(Coche coche) {
+		super(coche);
+	}
 
 }

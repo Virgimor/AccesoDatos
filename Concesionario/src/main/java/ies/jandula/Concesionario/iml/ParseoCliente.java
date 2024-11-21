@@ -20,8 +20,10 @@ public class ParseoCliente implements IParseoCliente{
 	public void parsearFichero(Scanner scanner) throws ConcesionarioException {
 		// TODO Auto-generated method stub
 		
+		//Nos saltamos la cabecera
 		scanner.nextLine();
 		
+		//Empezamos el bucle
 		while(scanner.hasNextLine()){
 			
 			String lineaDelFichero = scanner.nextLine();

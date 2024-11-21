@@ -19,5 +19,10 @@ public class DescuentoId implements Serializable{/**
 	private int anio;
 	
 	private String nif;
+	
+	public DescuentoId(int anio) {
+		this.anio = anio;
+		
+	}
 
 }
