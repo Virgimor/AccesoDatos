@@ -4,13 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 import jakarta.persistence.Embeddable;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Embeddable
 public class RepararId implements Serializable{
 
@@ -24,5 +22,9 @@ public class RepararId implements Serializable{
 	private String dniMecanico;
 	
 	private Date fechaReparacion;
+	
+	public RepararId(Date fechaReparacion) {
+		this.fechaReparacion=fechaReparacion;
+	}
 
 }

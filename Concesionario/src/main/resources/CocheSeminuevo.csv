@@ -1,4 +1,4 @@
-matricula,color,marca,modelo,cliente_id,kilometrosRecorridos
+matricula,color,marca,modelo,cliente,kilometrosRecorridos
 1234XYZ,Rojo,Toyota,Corolla,1,45000.5
 5678ABC,Azul,Ford,Focus,2,50000.0
 9101DEF,Negro,BMW,Serie 3,3,32000.3

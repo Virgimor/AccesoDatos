@@ -12,8 +12,8 @@ public class ConcesionarioException extends Exception{
 		
 	}
 	
-	public ConcesionarioException(String mensaje) {
-		super(mensaje);
+	public ConcesionarioException(int codigo, String mensaje) {
+		super( mensaje);
 			
 	}
 	

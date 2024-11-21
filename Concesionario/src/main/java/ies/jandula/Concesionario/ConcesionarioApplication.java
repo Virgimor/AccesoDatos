@@ -27,9 +27,11 @@ public class ConcesionarioApplication  implements CommandLineRunner{
 		
 		this.gestorParseo.parseoFichero(Costantes.FICHERO_MECANICO);
 		this.gestorParseo.parseoFichero(Costantes.FICHERO_CLIENTE);
-		this.gestorParseo.parseoFichero(Costantes.FICHERO_COCHE);
+		this.gestorParseo.parseoFichero(Costantes.FICHERO_COCHE_NUEVO);
+		this.gestorParseo.parseoFichero(Costantes.FICHERO_COCHE_SEMINUEVO);
 		this.gestorParseo.parseoFichero(Costantes.FICHERO_REPARAR);
 		this.gestorParseo.parseoFichero(Costantes.FICHERO_DESCUENTO);
+		
 		
 	}
 

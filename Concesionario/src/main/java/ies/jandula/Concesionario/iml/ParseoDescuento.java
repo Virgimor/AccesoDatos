@@ -41,17 +41,22 @@ public class ParseoDescuento implements iParseoDescuento{
 			
 			Descuento descuento = new Descuento();
 			
+			// Obtenemos el año del descuento a traves del primer elemento del array
 			int anio= Integer.valueOf(lineaDelFicheroTroceada[0]);
 			
+			// Crear un objeto DescuentoId que representa la clave primaria compuesta.
 			DescuentoId descuentoId = new DescuentoId(anio);
 			
+			// Setea el año en el objeto DescuentoId
 			descuentoId.setAnio(anio);
-			
+			// Asignar el identificador al descuento.
 			descuento.setDescuentoId(descuentoId);
 			descuento.setImporteDescuento(Double.valueOf(lineaDelFicheroTroceada[2]));
 			
+			// Buscar al cliente asociado al descuento usando su NIF
 			Optional<Cliente> optionalCliente = this.clienteRepository.findById(lineaDelFicheroTroceada[1]);
 			
+			// Si el cliente no está presente, registrar un error y lanzar una excepción.
 			if(!optionalCliente.isPresent()) {
 				
 				log.error("No existe el curso");

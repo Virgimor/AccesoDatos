@@ -37,6 +37,6 @@ public class Coche {
 	private String modelo;
 	
 	@ManyToOne
-	private Cliente cliente;
+	private Cliente nifCliente;
 
 }
