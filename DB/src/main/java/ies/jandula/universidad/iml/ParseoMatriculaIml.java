@@ -12,6 +12,7 @@ import ies.jandula.universidad.models.Alumno;
 import ies.jandula.universidad.models.Asignatura;
 import ies.jandula.universidad.models.Curso;
 import ies.jandula.universidad.models.Matricula;
+import ies.jandula.universidad.models.MatriculaId;
 import ies.jandula.universidad.repository.AlumnoRepository;
 import ies.jandula.universidad.repository.AsignaturaRepository;
 import ies.jandula.universidad.repository.CursoRepository;
@@ -76,6 +77,11 @@ public class ParseoMatriculaIml implements IParseoMatricula{
 			}
 			
 			matricula.setIdCurso(optionalCurso.get());
+			
+			MatriculaId matriculaId = new MatriculaId(optionaAlumno.get().getId(),
+													  optionalAsignatura.get().getId(),
+													  optionalCurso.get().getId());
+			matricula.setMatriculaId(matriculaId);
 			
 			this.matriculaRepository.saveAndFlush(matricula);
 		}

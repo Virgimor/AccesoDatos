@@ -61,10 +61,7 @@ public class ParseoPrestamo implements IParseoPrestamo{
 			libroId.setAutor(lineaDelFicheroTroceada[2]);
 			libroId.setAnioPublicacion(Integer.valueOf(lineaDelFicheroTroceada[3]));
 			
-			Libro libro= new Libro();
-			libro.setLibroId(libroId);
-			
-			Optional<Libro> optionalLibro = this.libroRepository.findById(libro);
+			Optional<Libro> optionalLibro = this.libroRepository.findById(libroId);
 			
 			if(!optionalLibro.isPresent()) {
 				

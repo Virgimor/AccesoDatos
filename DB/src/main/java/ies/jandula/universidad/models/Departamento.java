@@ -23,8 +23,8 @@ public class Departamento {
 	@Column(length=45)
 	private String nombre;
 	
-	@OneToMany(mappedBy="idDepartamento")
-	private List<Profesor> profesor;
+	/*@OneToMany(mappedBy="idDepartamento")
+	private List<Profesor> profesor;*/
 
 
 }

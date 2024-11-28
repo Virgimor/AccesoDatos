@@ -1,0 +1,4 @@
+fechaPrestamo,libro_titulo,libro_autor,libro_anio_publicacion,usuario_email,estado
+2023-11-01,El Quijote,Miguel de Cervantes,1605,juan.perez@example.com,en proceso
+2023-11-15,Cien Años de Soledad,Gabriel García Márquez,1967,maria.lopez@example.com,completado
+2023-12-01,La Sombra del Viento,Carlos Ruiz Zafón,2001,ana.garcia@example.com,pendiente

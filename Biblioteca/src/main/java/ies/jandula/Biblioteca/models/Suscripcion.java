@@ -14,8 +14,6 @@ public class Suscripcion {
 	@EmbeddedId
 	private SuscripcionId suscripcionId;
 	
-	
-	
 	@Column
 	private String estado;
 

@@ -52,12 +52,7 @@ public class Profesor {
 	@ManyToOne
 	private Departamento idDepartamento;
 	
-	@OneToMany(mappedBy = "idProfesor")
-	private List<Asignatura> asignaturas;
-	
-	/*
-	 * Constructor por defecto vacion
-	 */
-	
+	/*@OneToMany(mappedBy = "idProfesor")
+	private List<Asignatura> asignaturas;*/
 	
 }
