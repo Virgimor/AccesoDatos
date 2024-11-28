@@ -26,7 +26,7 @@ public class Curso {
 	@Column
 	private int anyoInicio;
 	
-	@OneToMany(mappedBy = "idCurso")
-	private List<Matricula> matricula;
+	/*@OneToMany(mappedBy = "idCurso")
+	private List<Matricula> matricula;*/
 
 }

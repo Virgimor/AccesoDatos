@@ -42,8 +42,8 @@ public class Asignatura {
 	@ManyToOne
 	private Profesor idProfesor;
 	
-	@OneToMany(mappedBy = "idAsignatura")
-	private List<Matricula> matricula;
+	/*@OneToMany(mappedBy = "idAsignatura")
+	private List<Matricula> matricula;*/
 
 
 }

@@ -23,7 +23,7 @@ public class Grado {
 	@Column(length = 100)
 	private String nombre;
 	
-	@OneToMany(mappedBy = "idGrado")
-	private List<Asignatura> asignaturas;
+	/*@OneToMany(mappedBy = "idGrado")
+	private List<Asignatura> asignaturas;*/
 
 }
