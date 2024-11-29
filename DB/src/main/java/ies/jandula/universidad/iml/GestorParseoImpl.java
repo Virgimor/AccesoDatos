@@ -100,7 +100,7 @@ public class GestorParseoImpl implements IGestorParseo{
 				break;
 				
 			default:
-				throw new UniversidadException("Fichero" + nombreFichero + "no encontrado");
+				throw new UniversidadException(4, "Fichero" + nombreFichero + "no encontrado");
 		}
 	}
 	
@@ -114,11 +114,11 @@ public class GestorParseoImpl implements IGestorParseo{
 		}
 		catch (FileNotFoundException fileNotFoundException)
 		{
-			throw new UniversidadException("Fichero " + nombreFichero + " no encontrado!", fileNotFoundException) ;
+			throw new UniversidadException(5, "Fichero " + nombreFichero + " no encontrado!", fileNotFoundException) ;
 		}
 		catch (URISyntaxException uriSyntaxException)
 		{
-			throw new UniversidadException("Fichero " + nombreFichero + " no encontrado!", uriSyntaxException) ;
+			throw new UniversidadException(6, "Fichero " + nombreFichero + " no encontrado!", uriSyntaxException) ;
 		}
 		
 	}

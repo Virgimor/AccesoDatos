@@ -17,7 +17,7 @@ public class DatesUtil {
 			return formatter.parse(fechaString);
 		}
 		catch (ParseException parseException) {
-			throw new UniversidadException("Fecha con formato incorrecta: " + fechaString, parseException);
+			throw new UniversidadException(8, "Fecha con formato incorrecta: " + fechaString, parseException);
 		}
 	}
 

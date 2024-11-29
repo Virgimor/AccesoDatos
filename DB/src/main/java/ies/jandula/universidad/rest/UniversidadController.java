@@ -1,61 +1,83 @@
 package ies.jandula.universidad.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import ies.jandula.universidad.models.Departamento;
-import ies.jandula.universidad.models.Profesor;
-import ies.jandula.universidad.repository.AsignaturaRepository;
-import ies.jandula.universidad.repository.DepartamentoRepository;
-import ies.jandula.universidad.repository.ProfesorRepository;
-import jakarta.annotation.PostConstruct;
+import ies.jandula.universidad.dto.ProfesorDto;
+import ies.jandula.universidad.exception.UniversidadException;
+import ies.jandula.universidad.service.MatriculaService;
+import ies.jandula.universidad.service.ProfesorService;
+import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
-@Service
+@RestController
+@Log4j2
+@NoArgsConstructor
+@RequestMapping(value = "/universidad")
 public class UniversidadController {
 	
 	@Autowired
-	private ProfesorRepository profesorRepository;
+	private MatriculaService matriculaService;
 	
 	@Autowired
-	private AsignaturaRepository asignaturaRepository;
+	private ProfesorService profesorService;
 	
-	@Autowired
-	private DepartamentoRepository departamentoRepository;
-	
-	@PostConstruct
-	public void init() {
-		Profesor profesor = new Profesor();
-		profesor.setId(2);
-		//Buscar profesores de género masculino
-//		System.out.println(this.profesorRepository.findBySexo("M"));
+	@RequestMapping(method = RequestMethod.GET, value = "/matricula/{alumnoId}/{asignaturaId}/{cursoId}")
+	public ResponseEntity<?> añadirMatricula(@PathVariable(value = "alumnoId") Integer alumnoId,
+											@PathVariable(value = "asignaturaId") Integer asignaturaId,
+											@PathVariable(value = "cursoId") Integer cursoId) {
 		
-		//Buscar los 10 profesores más viejos
-//		System.out.println(this.profesorRepository.findTop10ByOrderByFechaNacimientoDesc());
-		
-		//Buscar las 10 asignaturas con menos créditos de un profesor concreto
-//		System.out.println(this.asignaturaRepository.findTop10ByIdProfesorOrderByCreditosDesc(profesor));
-		
-		//Buscar asignaturas con más de 5 créditos
-		//System.out.println(this.asignaturaRepository.findByCreditosGreaterThan(5));
-		
-		//Buscar los 5 profesores más jóvenes (por fecha de nacimiento descendente):
-//		System.out.println(this.profesorRepository.findTop5ByOrderByFechaNacimientoDesc());
-		
-		//Buscar asignaturas impartidas por un profesor específico, ordenadas alfabéticamente por su nombre:
-//		System.out.println(this.asignaturaRepository.findByIdProfesorOrderByNombreAsc(profesor));
-		
-		//Buscar asignaturas con nombres que contengan una palabra específica (búsqueda parcial):
-//		System.out.println(this.asignaturaRepository.findByNombreContaining("Cál"));
-		
-		//Buscar todos los profesores de un departamento específico:
-		Departamento departamento = new Departamento();
-		departamento.setId(1);
-//		System.out.println(this.profesorRepository.findByIdDepartamento(departamento));
-		
-		//Buscar las 3 asignaturas con más créditos:
-		//System.out.println(this.asignaturaRepository.findTop3ByOrderByCreditosDesc());
-		
-		//Buscar profesores con nombres que comiencen con una letra específica:
-		System.out.println(this.profesorRepository.findByNombreStartingWith("M"));
+		try
+		{
+			this.matriculaService.insertarMatricula(alumnoId, asignaturaId, cursoId);
+			
+			return ResponseEntity.ok().build() ;
+			
+		}
+		catch (UniversidadException universidadException)
+		{
+			return ResponseEntity.status(400).body(universidadException.getBodyExceptionMessage()) ;
+		}
+		catch (Exception exception)
+		{
+			UniversidadException universidadException = new UniversidadException(100, "Excepción genérica", exception) ;
+			
+			log.error("Excepción genérica", exception) ;
+			
+			return ResponseEntity.status(500).body(universidadException.getBodyExceptionMessage()) ;
+		}
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/profesor", consumes = "{application/json}")
+	public ResponseEntity<?> añadirProfesor(@RequestBody(required = true) ProfesorDto profesor, @RequestHeader (required = true)Integer idDepartamento) {
+		
+		try
+		{
+			this.profesorService.insertarProfesor(profesor.getId(), profesor.getNif(), profesor.getNombre(), profesor.getApellido1(), profesor.getApellido2(), 
+					profesor.getCiudad(), profesor.getDireccion(), profesor.getTelefono(), profesor.getFechaNacimiento(), profesor.getSexo(), 
+					idDepartamento);
+			
+			return ResponseEntity.ok().build() ;
+			
+		}
+		catch (UniversidadException universidadException)
+		{
+			return ResponseEntity.status(400).body(universidadException.getBodyExceptionMessage()) ;
+		}
+		catch (Exception exception)
+		{
+			UniversidadException universidadException = new UniversidadException(100, "Excepción genérica", exception) ;
+			
+			log.error("Excepción genérica", exception) ;
+			
+			return ResponseEntity.status(500).body(universidadException.getBodyExceptionMessage()) ;
+		}
+	}
+
 }

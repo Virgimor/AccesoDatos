@@ -29,8 +29,6 @@ public class ParseoAsignaturaIml implements IParseoAsignatura{
 	@Autowired
 	private GradoRepository gradoRepository;
 	
-	UniversidadException universidadException = new UniversidadException();
-
 	@Override
 	public void parseaFichero(Scanner scanner) throws UniversidadException{
 		// TODO Auto-generated method stub
@@ -56,16 +54,15 @@ public class ParseoAsignaturaIml implements IParseoAsignatura{
 			if(!optionalProfesor.isPresent()) {
 				
 				log.error("No existe el profesor");
-				throw new UniversidadException("2", universidadException);
+				throw new UniversidadException(2, "No existe el profesor");
 			}
 			
 			asignatura.setIdProfesor(optionalProfesor.get());
 			
 			Optional<Grado> optionalGrado = this.gradoRepository.findById(Integer.valueOf(lineaDelFicheroTroceada[7]));
 			if(!optionalGrado.isPresent()) {
-				
 				log.error("No existe el grado");
-				throw new UniversidadException("2", universidadException);
+				throw new UniversidadException(2, "No existe el grado");
 			}
 			
 			asignatura.setIdGrado(optionalGrado.get());
