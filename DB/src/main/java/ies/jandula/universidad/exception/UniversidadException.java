@@ -16,7 +16,7 @@ public class UniversidadException extends Exception{
 	
 	private String mensaje;
 	
-	private Throwable excepcion ;
+	private Throwable excepcion;
 	
 	public UniversidadException(Integer codigo, String mensaje)
 	{
@@ -25,11 +25,11 @@ public class UniversidadException extends Exception{
 		this.mensaje= mensaje;
 	}
 	
-	public UniversidadException(Integer movieErrorId, String message, Throwable excepcion)
+	public UniversidadException(Integer codigo, String message, Throwable excepcion)
 	{
 		super(message, excepcion);
 		
-		this.codigo=movieErrorId;
+		this.codigo=codigo;
 		this.mensaje= message;
 		this.excepcion= excepcion ;
 	}

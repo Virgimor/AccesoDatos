@@ -71,11 +71,11 @@ public class MatriculaService {
 		matricula.setMatriculaId(matriculaId);
 		
 		Optional<Matricula> matriculaOptional = this.matriculaRepository.findById(matriculaId) ;
-		if (matriculaOptional.isPresent())
-		{
-			log.error("La matrícula ya existe");
-			throw new UniversidadException(3, "La matrícula ya existe");
-		}
+//		if (matriculaOptional.isPresent())
+//		{
+//			log.error("La matrícula ya existe");
+//			throw new UniversidadException(3, "La matrícula ya existe");
+//		}
 
 		this.matriculaRepository.saveAndFlush(matricula);
 	}

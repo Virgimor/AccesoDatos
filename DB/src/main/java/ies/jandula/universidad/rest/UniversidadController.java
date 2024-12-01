@@ -54,8 +54,9 @@ public class UniversidadController {
 		}
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/profesor", consumes = "{application/json}")
-	public ResponseEntity<?> añadirProfesor(@RequestBody(required = true) ProfesorDto profesor, @RequestHeader (required = true)Integer idDepartamento) {
+	@RequestMapping(method = RequestMethod.POST, value = "/profesor")
+	public ResponseEntity<?> añadirProfesor(@RequestBody(required = true) ProfesorDto profesor, 
+			@RequestHeader (name = "idDepartamento", required = true)Integer idDepartamento) throws UniversidadException{
 		
 		try
 		{
@@ -66,17 +67,14 @@ public class UniversidadController {
 			return ResponseEntity.ok().build() ;
 			
 		}
-		catch (UniversidadException universidadException)
-		{
-			return ResponseEntity.status(400).body(universidadException.getBodyExceptionMessage()) ;
-		}
+		
 		catch (Exception exception)
 		{
-			UniversidadException universidadException = new UniversidadException(100, "Excepción genérica", exception) ;
+			
 			
 			log.error("Excepción genérica", exception) ;
 			
-			return ResponseEntity.status(500).body(universidadException.getBodyExceptionMessage()) ;
+			return ResponseEntity.status(500).body(exception.getMessage()) ;
 		}
 	}
 
