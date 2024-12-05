@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ies.jandula.query.repository.AlumnoRepository;
+import ies.jandula.query.repository.TutorRepository;
 import jakarta.annotation.PostConstruct;
 
 @Service
@@ -11,6 +12,9 @@ public class ControllerInstituto {
 	
 	@Autowired
 	 private AlumnoRepository alumnoRepository;
+	
+	@Autowired
+	private TutorRepository tutorRepository;
 	
 	//cuando se crea una intancia de controllerInstituto
 	@PostConstruct
@@ -37,7 +41,26 @@ public class ControllerInstituto {
 				
 //		System.out.println(this.alumnoRepository.encontrarPorDireccion("Calle Amapola 1"));
 //		System.out.println(this.alumnoRepository.encontrarPorDireccionQueContiene("3"));
-		System.out.println(this.alumnoRepository.encontrarPorEdadMenorQue(20));
+//		System.out.println(this.alumnoRepository.encontrarPorEdadMenorQue(20));
+//		System.out.println(this.alumnoRepository.encontrarPorAprobados());
+//		System.out.println(this.alumnoRepository.encontrarPorSuspensos());
+//		System.out.println(this.alumnoRepository.encontrarDireccionYEdad("Calle Amapola 3", 25));
+//		System.out.println(this.alumnoRepository.encontrarDireccionOEdad("Calle Amapola 3", 35));
+//		System.out.println(this.alumnoRepository.encontrarDireccionOrdenadoPorEdadAsc("Calle Amapola 3"));
+		
+//		System.out.println(this.alumnoRepository.encontrarLos10PrimerosOrdenadosAsc());
+//		System.out.println(this.alumnoRepository.encontrarPorDireccionDistintos("Calle Amapola 1"));
+//		System.out.println(this.alumnoRepository.encontrarAlumnoPorTutor("Laura"));
+//		System.out.println(this.alumnoRepository.encontrarAlumnoPorTutor("Laura"));
+//		System.out.println(this.tutorRepository.encontrarTutorPorNifAlumno("123456789B"));
+//		System.out.println(this.alumnoRepository.encontrarAlumnosPorTutorCuandoTenga2OMas());
+//		System.out.println(this.alumnoRepository.mediaEdadDeLosAlumnos());
+		
+		System.out.println("Cuenta cuántos alumnos de Española tienen como tutor a pepe");
+		System.out.println(this.alumnoRepository.cuantosAlumnosEspaniolesYPepeComoTutor("Luisa", "Española"));
+		
+//		System.out.println("Dime el mentor con más alumnos que tengan como tutor a pepe");
+//		System.out.println(this.alumnoRepository.mentorConMasAlumnosConTutorEspecifico("Luisa", "Española"));
 	}
 
 }

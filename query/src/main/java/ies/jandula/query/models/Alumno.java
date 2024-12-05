@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,5 +29,20 @@ public class Alumno {
 	
 	@Column
 	private Boolean aprobado;
+	
+	@ManyToOne
+	private Tutor tutor;
+	
+	@ManyToOne
+	private Nacionalidad nacionalidad;
+	
+	@ManyToOne
+	private Alumno mentor;
+
+	@Override
+	public String toString() {
+		return "Alumno [id=" + id + ", nif=" + nif + ", edad=" + edad + ", direccion=" + direccion + ", aprobado="
+				+ aprobado + ", tutor=" + tutor + ", nacionalidad=" + nacionalidad + ", mentor=" + mentor.id + "]";
+	}
 
 }
