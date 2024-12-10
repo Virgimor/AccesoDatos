@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
@@ -23,7 +24,7 @@ public class Nacionalidad {
 	@Column//"España"
 	private String pais;
 	
-	@OneToMany(mappedBy = "nacionalidad")
+	@OneToMany(mappedBy = "nacionalidad", fetch = FetchType.EAGER)
 	List<Alumno> listaAlumno;
 
 }

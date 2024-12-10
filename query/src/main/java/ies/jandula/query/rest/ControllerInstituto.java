@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ies.jandula.query.repository.AlumnoRepository;
+import ies.jandula.query.repository.NacionalidadRepository;
 import ies.jandula.query.repository.TutorRepository;
 import jakarta.annotation.PostConstruct;
 
@@ -15,6 +16,9 @@ public class ControllerInstituto {
 	
 	@Autowired
 	private TutorRepository tutorRepository;
+	
+	@Autowired
+	private NacionalidadRepository nacionalidadRepository;
 	
 	//cuando se crea una intancia de controllerInstituto
 	@PostConstruct
@@ -128,29 +132,35 @@ public class ControllerInstituto {
 		
 //		QUERYS PACO
 		
-		System.out.println("Encontrar a los alumnos que tengan un tutor especifico");
-		System.out.println(this.alumnoRepository.encontrarAlumnoPorTutor("Laura"));
+//		System.out.println("Encontrar a los alumnos que tengan un tutor especifico");
+//		System.out.println(this.alumnoRepository.encontrarAlumnoPorTutor("Laura"));
+//		
+//		System.out.println("Encontrar a los tutores que tengas alumnos mayores de 18 años");
+//		System.out.println(this.tutorRepository.encontrarTutoresConAlumnosMayores18());
+//		
+//		System.out.println("Encontrar los tutores que tengan como alumno con un nif especifico");
+//		System.out.println(this.tutorRepository.encontrarTutorPorNifAlumno("123456789B"));
+//		
+//		System.out.println("Encuentra los alumnos cuyos tutores tienen más de 2 alumnos asignados");
+//		System.out.println(this.alumnoRepository.encontrarAlumnosPorTutorCuandoTenga2OMas());
+//		
+//		System.out.println("Media de edad de los alumnos");
+//		System.out.println(this.alumnoRepository.mediaEdadDeLosAlumnos());
+//		
+//		System.out.println("Cuenta cuántos alumnos de Española tienen como tutor a pepe");
+//		System.out.println(this.alumnoRepository.cuantosAlumnosEspaniolesYPepeComoTutor("Española", "Luisa"));
+//		
+//		System.out.println("Dime el mentor con más alumnos que tengan como un tutor especifico");
+//		System.out.println(this.alumnoRepository.mentorConMasAlumnosConTutorEspecifico("Luisa"));
+//		
+//		System.out.println("Busca los alumnos que no tienen mentor ni tampoco tutor que sean españoles");
+//		System.out.println(this.alumnoRepository.alumnosSinTutoYSinMentor("Española"));
 		
-		System.out.println("Encontrar a los tutores que tengas alumnos mayores de 18 años");
-		System.out.println(this.tutorRepository.encontrarTutoresConAlumnosMayores18());
+//		System.out.println("Dime el tutor cuyo alumnos asociado no tenga mentor");
+//		System.out.println(this.tutorRepository.encontrarTutor());
 		
-		System.out.println("Encontrar los tutores que tengan como alumno con un nif especifico");
-		System.out.println(this.tutorRepository.encontrarTutorPorNifAlumno("123456789B"));
-		
-		System.out.println("Encuentra los alumnos cuyos tutores tienen más de 2 alumnos asignados");
-		System.out.println(this.alumnoRepository.encontrarAlumnosPorTutorCuandoTenga2OMas());
-		
-		System.out.println("Media de edad de los alumnos");
-		System.out.println(this.alumnoRepository.mediaEdadDeLosAlumnos());
-		
-		System.out.println("Cuenta cuántos alumnos de Española tienen como tutor a pepe");
-		System.out.println(this.alumnoRepository.cuantosAlumnosEspaniolesYPepeComoTutor("Española", "Luisa"));
-		
-		System.out.println("Dime el mentor con más alumnos que tengan como un tutor especifico");
-		System.out.println(this.alumnoRepository.mentorConMasAlumnosConTutorEspecifico("Luisa"));
-		
-		System.out.println("Busca los alumnos que no tienen mentor ni tampoco tutor que sean españoles");
-		System.out.println(this.alumnoRepository.alumnosSinTutoYSinMentor("Española"));
+		System.out.println("Dime la nacionalidad de aquellos alumnos con nif especifico que tienen mentor pero no tutor");
+		System.out.println(this.nacionalidadRepository.encontrarNacionalidad("123456789A"));
 	}
 
 }

@@ -131,4 +131,7 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long>{
 	@Query("SELECT a FROM Alumno a JOIN a.nacionalidad n WHERE a.tutor is null AND a.mentor is null AND a.nacionalidad.nombre = :nombre")
 	List<Alumno> alumnosSinTutoYSinMentor(@Param("nombre") String nombre);
 	
+	
+	
+	
 }
