@@ -42,7 +42,7 @@ public class Alumno {
 	@Override
 	public String toString() {
 		return "Alumno [id=" + id + ", nif=" + nif + ", edad=" + edad + ", direccion=" + direccion + ", aprobado="
-				+ aprobado + ", tutor=" + tutor + ", nacionalidad=" + nacionalidad + ", mentor=" + mentor.id + "]";
+				+ aprobado + ", tutor=" + tutor + ", nacionalidad=" + nacionalidad + ", mentor=" + (mentor!= null ? mentor.getId() : "null") + "]";
 	}
 
 }
