@@ -30,5 +30,6 @@ public interface TutorRepository extends JpaRepository<Tutor, Integer>{
 	
 	@Query("SELECT t FROM Tutor t JOIN t.listaAlumno alu WHERE alu.mentor is null")
 	Tutor encontrarTutor(); 
+	
 
 }

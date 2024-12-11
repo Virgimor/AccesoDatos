@@ -159,8 +159,23 @@ public class ControllerInstituto {
 //		System.out.println("Dime el tutor cuyo alumnos asociado no tenga mentor");
 //		System.out.println(this.tutorRepository.encontrarTutor());
 		
-		System.out.println("Dime la nacionalidad de aquellos alumnos con nif especifico que tienen mentor pero no tutor");
-		System.out.println(this.nacionalidadRepository.encontrarNacionalidad("123456789A"));
+//		System.out.println("Dime la nacionalidad de aquellos alumnos con nif especifico que tienen mentor pero no tutor");
+//		System.out.println(this.nacionalidadRepository.encontrarNacionalidad("123456789A"));
+		
+//		System.out.println("Dame el nif y nombre del tutor del alumno que tenga mas de 18 años");
+//		System.out.println(this.alumnoRepository.encontrarTutorEspecifico());
+		
+//		System.out.println("Dame el nif y nombre del tutor del alumno que tenga mas de 18 años");
+//		System.out.println(this.alumnoRepository.encontrarTutorEspecifico());
+		
+//		System.out.println("Dime el numero de aprobados de un pais concreto");
+//		System.out.println(this.alumnoRepository.numeroAprobadosPorPais());
+		
+		//PAGEABLE
+		
+		System.out.println(this.alumnoRepository.findAll());
+		
+		
 	}
 
 }
