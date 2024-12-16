@@ -10,11 +10,13 @@ import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@ToString(exclude = "matriculas")
 public class Asignatura {
 	
 	@Id
@@ -42,8 +44,8 @@ public class Asignatura {
 	@ManyToOne
 	private Profesor idProfesor;
 	
-	/*@OneToMany(mappedBy = "idAsignatura")
-	private List<Matricula> matricula;*/
+	@OneToMany(mappedBy = "idAsignatura")
+	private List<Matricula> matriculas;
 
 
 }

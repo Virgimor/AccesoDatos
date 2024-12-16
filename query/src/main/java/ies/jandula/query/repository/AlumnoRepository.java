@@ -2,14 +2,13 @@ package ies.jandula.query.repository;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import ies.jandula.query.dto.AlumnoDto;
+import ies.jandula.query.dto.InfoAlumnoDto;
 import ies.jandula.query.dto.AprobadoAlumnoDto;
+import ies.jandula.query.dto.EdadAlumnoDto;
 import ies.jandula.query.models.Alumno;
 
 public interface AlumnoRepository extends JpaRepository<Alumno, Long>{
@@ -136,12 +135,14 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long>{
 	List<Alumno> alumnosSinTutoYSinMentor(@Param("nombre") String nombre);
 	
 	
-	@Query("SELECT new ies.jandula.query.dto.AlumnoDto("+
+	@Query("SELECT new ies.jandula.query.dto.InfoAlumnoDto("+
 			"alu.nif, alu.tutor.nombre)"+
 			"FROM Alumno alu WHERE alu.edad>18")
-	List<AlumnoDto> encontrarTutorEspecifico();
+	List<InfoAlumnoDto> encontrarTutorEspecifico();
 	
 	//Dime el numero de alumnos con cada edad
+	@Query("SELECT new ies.jandula.query.dto.EdadAlumnoDto(alu.edad, Count(alu)) from Alumno alu GROUP BY alu.edad")
+	List<EdadAlumnoDto> encontrarNumeroAlumnosEdadQuery();
 	
 	
 	@Query("SELECT new ies.jandula.query.dto.AprobadoAlumnoDto("
@@ -149,7 +150,9 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long>{
 			+ "FROM Alumno alu WHERE alu.aprobado = true GROUP BY alu.nacionalidad")
 	List<AprobadoAlumnoDto> numeroAprobadosPorPais();
 	
-	
-	Page<Alumno> findAll(Pageable pageable);
+	@Query("SELECT new ies.jandula.query.dto.AlumnoDto("+
+			"alu.id, alu.nif, alu.edad, alu.direccion, alu.aprobado, alu.tutor.id, alu.tutor.nombre, alu.nacionalidad.nombre, alu.nacionalidad.pais, alu.mentor.id, alu.mentor.nif, alu.mentor.edad, alu.mentor.direccion, alu.mentor.aprobado )"+
+			"FROM Alumno alu")
+	List<InfoAlumnoDto> encontrarAlumnoDto();
 	
 }

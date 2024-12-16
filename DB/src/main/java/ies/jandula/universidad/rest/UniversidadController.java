@@ -1,7 +1,11 @@
 package ies.jandula.universidad.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -10,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ies.jandula.universidad.dto.ProfesorDto;
+import ies.jandula.universidad.dtos.GradoDto;
 import ies.jandula.universidad.exception.UniversidadException;
+import ies.jandula.universidad.repository.AlumnoRepository;
+import ies.jandula.universidad.repository.GradoRepository;
 import ies.jandula.universidad.service.MatriculaService;
 import ies.jandula.universidad.service.ProfesorService;
 import lombok.NoArgsConstructor;
@@ -27,6 +34,12 @@ public class UniversidadController {
 	
 	@Autowired
 	private ProfesorService profesorService;
+	
+	@Autowired
+	private GradoRepository gradoRepository;
+	
+	@Autowired
+	private AlumnoRepository alumnoRepository;
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/matricula/{alumnoId}/{asignaturaId}/{cursoId}")
 	public ResponseEntity<?> añadirMatricula(@PathVariable(value = "alumnoId") Integer alumnoId,
@@ -77,5 +90,45 @@ public class UniversidadController {
 			return ResponseEntity.status(500).body(exception.getMessage()) ;
 		}
 	}
-
+	
+	//Dime el nombre del grado junto con el numero de matriculados
+	@GetMapping("/grado")
+	public Page<GradoDto> obtenerGrado(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.gradoRepository.encontrarGradoConNumeroAprobados(pageable);
+		
+	}
+	
+	//Nombre de alumno y profesor que tenga la misma edad
+//	@GetMapping("/obtenerAlumno")
+//	public Page<Alumno> obtenerAlumno(@PageableDefault(size=5) Pageable pageable){
+//		
+//		return this.alumnoRepository.findAll(pageable);
+//		
+//	}
+			
+	//Dime el nombre del departamentro con el número de asignaturas que posee
+//	@GetMapping("/grado")
+//	public Page<GradoDto> obtenerGrado(@PageableDefault(size=10) Pageable pageable){
+//		
+//		return this.gradoRepository.encontrarGradoConNumeroAprobados(pageable);
+//		
+//	}
+			
+	//Nombre y teléfono de alumno, y nombre y telefono del profesor que vivan en Andújar
+//	@GetMapping("/grado")
+//	public Page<GradoDto> obtenerGrado(@PageableDefault(size=10) Pageable pageable){
+//		
+//		return this.gradoRepository.encontrarGradoConNumeroAprobados(pageable);
+//		
+//	}
+			
+	//Dame la información completa de matriculas, con el alumno (nombre y apellidos), asignatura (nombre y tipo) y curso (año inicio y año fin)
+//	@GetMapping("/grado")
+//	public Page<GradoDto> obtenerGrado(@PageableDefault(size=10) Pageable pageable){
+//		
+//		return this.gradoRepository.encontrarGradoConNumeroAprobados(pageable);
+//		
+//	}
+	
 }

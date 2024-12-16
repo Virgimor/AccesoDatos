@@ -1,5 +1,5 @@
 spring:
-  jpa.hibernate.ddl-auto: update
+  jpa.hibernate.ddl-auto: none
   spring.jpa.hibernate.ddl-auto: validate
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver

@@ -171,10 +171,8 @@ public class ControllerInstituto {
 //		System.out.println("Dime el numero de aprobados de un pais concreto");
 //		System.out.println(this.alumnoRepository.numeroAprobadosPorPais());
 		
-		//PAGEABLE
-		
-		System.out.println(this.alumnoRepository.findAll());
-		
+//		System.out.println("Dime el numero de aprobados de un pais concreto");
+//		System.out.println(this.alumnoRepository.encontrarAlumnoDto());
 		
 	}
 
