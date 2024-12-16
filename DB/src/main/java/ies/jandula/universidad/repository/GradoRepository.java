@@ -10,7 +10,8 @@ import ies.jandula.universidad.models.Grado;
 
 public interface GradoRepository extends JpaRepository<Grado, Integer>{
 	
-	@Query("SELECT new ies.jandula.universidad.dtos.GradoDto(g.nombre, COUNT(m)) FROM Grado g JOIN Asignatura a ON a.idGrado.id = g.id JOIN Matricula m ON m.idAsignatura.id = a.id GROUP BY g")
+	@Query("SELECT new ies.jandula.universidad.dtos.GradoDto(g.nombre, COUNT(m)) "
+			+ "FROM Grado g JOIN Asignatura a ON a.idGrado.id = g.id JOIN Matricula m ON m.idAsignatura.id = a.id GROUP BY g")
 	Page<GradoDto> encontrarGradoConNumeroAprobados(Pageable pageable);
 	
 }

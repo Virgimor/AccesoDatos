@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ies.jandula.universidad.dto.ProfesorDto;
+import ies.jandula.universidad.dtos.AlumnoProfesorDto;
 import ies.jandula.universidad.dtos.GradoDto;
 import ies.jandula.universidad.exception.UniversidadException;
 import ies.jandula.universidad.repository.AlumnoRepository;
 import ies.jandula.universidad.repository.GradoRepository;
+import ies.jandula.universidad.repository.ProfesorRepository;
 import ies.jandula.universidad.service.MatriculaService;
 import ies.jandula.universidad.service.ProfesorService;
 import lombok.NoArgsConstructor;
@@ -40,6 +42,9 @@ public class UniversidadController {
 	
 	@Autowired
 	private AlumnoRepository alumnoRepository;
+	
+	@Autowired
+	private ProfesorRepository profesorRepository;
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/matricula/{alumnoId}/{asignaturaId}/{cursoId}")
 	public ResponseEntity<?> añadirMatricula(@PathVariable(value = "alumnoId") Integer alumnoId,
@@ -100,12 +105,12 @@ public class UniversidadController {
 	}
 	
 	//Nombre de alumno y profesor que tenga la misma edad
-//	@GetMapping("/obtenerAlumno")
-//	public Page<Alumno> obtenerAlumno(@PageableDefault(size=5) Pageable pageable){
-//		
-//		return this.alumnoRepository.findAll(pageable);
-//		
-//	}
+	@GetMapping("/obtenerAlumnoYProfesor")
+	public Page<AlumnoProfesorDto> obtenerAlumnoYProfesor(@PageableDefault(size=5) Pageable pageable){
+		
+		return this.profesorRepository.alumnoYProfesorMismaEdad(pageable);
+		
+	}
 			
 	//Dime el nombre del departamentro con el número de asignaturas que posee
 //	@GetMapping("/grado")
