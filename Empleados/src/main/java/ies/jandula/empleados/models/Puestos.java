@@ -1,10 +1,12 @@
 package ies.jandula.empleados.models;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -25,5 +27,11 @@ public class Puestos {
 	
 	@Column(precision = 6, scale = 0)
 	private BigDecimal salarioMax;
+	
+	@OneToMany(mappedBy = "puestos")
+	private List<Empleados> listaEmpleados;
+	
+	@OneToMany(mappedBy = "puestos")
+	private List<HistorialPuestos> listaHistorialPuestos;
 
 }

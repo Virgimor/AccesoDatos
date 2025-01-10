@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import ies.jandula.empleados.dtos.Consulta3y23;
-import ies.jandula.empleados.dtos.Consulta6;
+import ies.jandula.empleados.dtos.Consulta6Y15;
 import ies.jandula.empleados.models.Ubicaciones;
 
 public interface UbicacionesRepository extends JpaRepository<Ubicaciones, BigDecimal>{
@@ -20,16 +20,16 @@ public interface UbicacionesRepository extends JpaRepository<Ubicaciones, BigDec
 			+ "JOIN u.paises p")
 	Page<Consulta3y23> encontrarUbicacionConCiudadYPais(Pageable pageable);
 	
-	@Query("SELECT new ies.jandula.empleados.dtos.Consulta6(u.ciudad, p.nombrePais) "
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta6Y15(u.ciudad, p.nombrePais) "
 			+ "FROM Ubicaciones u "
 			+ "JOIN u.paises p")
-	List<Consulta6> encontrarUbicacionConNombrePais();
+	List<Consulta6Y15> encontrarUbicacionConNombrePais();
 	
-	@Query("SELECT new ies.jandula.empleados.dtos.Consulta6(u.ciudad, p.nombrePais) "
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta6Y15(u.ciudad, p.nombrePais) "
 			+ "FROM Ubicaciones u "
 			+ "JOIN u.paises p "
 			+ "WHERE p.nombrePais LIKE :letra%")
-	List<Consulta6> encontrarUbicacionConNombrePaisEmpiezanPorC(@Param("letra") Character letra);
+	List<Consulta6Y15> encontrarUbicacionConNombrePaisEmpiezanPorC(@Param("letra") Character letra);
 	
 	@Query("SELECT new ies.jandula.empleados.dtos.Consulta3y23(u.direccion, u.ciudad, p.nombrePais) "
 			+ "FROM Ubicaciones u "

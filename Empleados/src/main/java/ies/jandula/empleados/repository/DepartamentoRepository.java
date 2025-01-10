@@ -3,12 +3,9 @@ package ies.jandula.empleados.repository;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import ies.jandula.empleados.dtos.Consulta18;
 import ies.jandula.empleados.dtos.Consulta27Y31Y36;
 import ies.jandula.empleados.dtos.Consulta32;
 import ies.jandula.empleados.dtos.Consulta37Y43;
@@ -24,11 +21,11 @@ public interface DepartamentoRepository extends JpaRepository<Departamentos, Big
 			+ "JOIN d.ubicaciones u")
 	List<Consulta8> encontrarDepartamentoConNombreUbicacion();
 	
-	@Query("SELECT DISTINCT new ies.jandula.empleados.dtos.Consulta18(d.nombreDepartamento) "
+	@Query("SELECT DISTINCT d.nombreDepartamento "
 			+ "FROM Empleados e "
 			+ "JOIN e.departamentos d "
 			+ "WHERE e.salario >=10000")
-	List<Consulta18> encontrarDepartamentoConEmpleadosYElSalarioMayor10000();
+	List<String> encontrarDepartamentoConEmpleadosYElSalarioMayor10000();
 	
 	@Query("SELECT new ies.jandula.empleados.dtos.Consulta27Y31Y36(d.nombreDepartamento, COUNT(e.idEmpleado) AS cantidadEmpleados) "
 			+ "FROM Empleados e "

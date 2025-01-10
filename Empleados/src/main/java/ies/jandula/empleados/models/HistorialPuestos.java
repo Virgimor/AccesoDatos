@@ -7,6 +7,7 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,5 +29,10 @@ public class HistorialPuestos {
 	@ManyToOne
 	@JoinColumn(name = "id_puesto", referencedColumnName = "idPuesto")
 	private Puestos puestos;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_empleado", referencedColumnName = "idEmpleado")
+	@MapsId("empleados")
+	private Empleados empleados;
 
 }

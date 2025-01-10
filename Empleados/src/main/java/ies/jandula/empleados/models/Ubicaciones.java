@@ -1,12 +1,14 @@
 package ies.jandula.empleados.models;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -34,5 +36,8 @@ public class Ubicaciones {
 	@ManyToOne
 	@JoinColumn(name = "id_pais", referencedColumnName = "idPais")
 	private Paises paises;
+	
+	@OneToMany(mappedBy = "ubicaciones")
+	private List<Departamentos> listaDepartamentos;
 
 }

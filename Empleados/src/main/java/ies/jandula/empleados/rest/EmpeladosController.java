@@ -55,9 +55,9 @@ public class EmpeladosController {
 	@Autowired
 	private UbicacionesRepository ubicacionesRepository;
 	
-//	System.out.println("1. Obtener todos los empleados y sus respectivos nombres de departamento.");
+//	1. Obtener todos los empleados y sus respectivos nombres de departamento.
 	@GetMapping("/encontrarEmpleadosConSusDepartamentos")
-	public Page<Consulta1Y11Y14Y20> encontrarEmpleadosConSusDepartamentos(@PageableDefault(size=10) Pageable pageable){
+	public Page<Consulta1Y11Y14Y20> encontrarEmpleadosConSusDepartamentos(@PageableDefault(size=10, page=0) Pageable pageable){
 		
 		return this.empleadosRepository.encontrarEmpleadosConSusDepartamentos(pageable);
 		

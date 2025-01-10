@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Consulta6 {
+public class Consulta6Y15 {
 	
 	private String nombre;
 	

@@ -33,17 +33,17 @@ public interface EmpleadosRepository extends JpaRepository<Empleados, BigDecimal
 			+ "JOIN e.departamentos d")
 	Page<Consulta1Y11Y14Y20> encontrarEmpleadosConSusDepartamentos(Pageable pageable);
 	
-	@Query("SELECT new ies.jandula.empleados.dtos.Consulta4Y16(e.nombre, e.apellidos, p.tituloPuesto) "
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta4Y16(e.nombre, e.apellido, p.tituloPuesto) "
 			+ "FROM Empleados e "
 			+ "JOIN e.puestos p")
 	Page<Consulta4Y16> encontrarNombreYApellidosEmpleadosConNombrePuesto(Pageable pageable);
 	
-	@Query("SELECT new ies.jandula.empleados.dtos.Consulta5Y26(e.nombre, e.apellidos, g.nombre, g.apellidos) "
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta5Y26(e.nombre, e.apellido, g.nombre, g.apellido) "
 			+ "FROM Empleados e "
 			+ "JOIN e.gerente g")
 	Page<Consulta5Y26> encontrarNombreYApellidosEmpleadosConNombreYApellidosDelGerente(Pageable pageable);
 	
-	@Query("SELECT new ies.jandula.empleados.dtos.Consulta9(e.nombre, e.apellidos, d.nombreDepartamento) "
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta9(e.nombre, e.apellido, d.nombreDepartamento) "
 			+ "FROM Empleados e "
 			+ "JOIN e.departamentos d "
 			+ "WHERE d.nombreDepartamento = :nombreDepartamento")
@@ -65,16 +65,16 @@ public interface EmpleadosRepository extends JpaRepository<Empleados, BigDecimal
 	@Query("SELECT new ies.jandula.empleados.dtos.Consulta1Y11Y14Y20(e.nombre, d.nombreDepartamento) "
 			+ "FROM Empleados e "
 			+ "JOIN e.departamentos d "
-			+ "WHERE e.fechaContrato >= :fechaContrato")
+			+ "WHERE YEAR(e.fechaContrato) >= 2000")
 	List<Consulta1Y11Y14Y20> encontrarEmpleadosConSusDepartamentosConContratoEspecifico(@Param("fechaContrato") Date fechaContrato);
 	
-	@Query("SELECT new ies.jandula.empleados.dtos.Consulta4Y16(e.nombre, e.apellidos, p.tituloPuesto) "
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta4Y16(e.nombre, e.apellido, p.tituloPuesto) "
 			+ "FROM Empleados e "
 			+ "JOIN e.puestos p "
-			+ "WHERE e.apellidos LIKE %:palabra")
+			+ "WHERE e.apellido LIKE %:palabra")
 	List<Consulta4Y16> encontrarNombreYApellidosTerminaEnSonConNombrePuesto(@Param("palabra") String palabra);
 	
-	@Query("SELECT new ies.jandula.empleados.dtos.Consulta17Y30(e.nombre, e.apellidos) "
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta17Y30(e.nombre, e.apellido) "
 			+ "FROM Empleados e "
 			+ "WHERE e.gerente is null")
 	List<Consulta17Y30> encontrarNombreYApellidosEmpleadosSinGerente();
@@ -102,10 +102,10 @@ public interface EmpleadosRepository extends JpaRepository<Empleados, BigDecimal
 			+ "ORDER BY e.fechaContrato ASC, e.salario DESC")
 	Page<Consulta24> encontrarEmpleadosOrdenadoPorFechaDeContratoYSalario(Pageable pageable);
 	
-	@Query("SELECT new ies.jandula.empleados.dtos.Consulta5Y26(e.nombre, e.apellidos, g.nombre, g.apellidos) "
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta5Y26(e.nombre, e.apellido, g.nombre, g.apellido) "
 			+ "FROM Empleados e "
 			+ "JOIN e.gerente g "
-			+ "ORDER BY g.apellidos ASC")
+			+ "ORDER BY g.apellido ASC")
 	Page<Consulta5Y26> encontrarNombreYApellidosEmpleadosConNombreYApellidosDelGerenteOrdenadosPorApellidoAsc(Pageable pageable);
 	
 	@Query("SELECT new ies.jandula.empleados.dtos.Consulta28(e.nombre, p.idPais, e.salario) "
@@ -117,10 +117,10 @@ public interface EmpleadosRepository extends JpaRepository<Empleados, BigDecimal
 			+ "ORDER BY e.salario ASC")
 	List<Consulta28> encontrarNombreEmpleadoDelPaisITOrdenadoPorSalario();
 	
-	@Query("SELECT new ies.jandula.empleados.dtos.Consulta17Y30(e.nombre, e.apellidos) "
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta17Y30(e.nombre, e.apellido) "
 			+ "FROM Empleados e "
 			+ "WHERE e.gerente is null "
-			+ "ORDER BY e.apellidos ASC")
+			+ "ORDER BY e.apellido ASC")
 	List<Consulta17Y30> encontrarNombreYApellidosEmpleadosSinGerenteOrdenadosAlfabeticamente();
 	
 	@Query("SELECT DISTINCT new ies.jandula.empleados.dtos.Consulta38(COUNT(e.idEmpleado), e.fechaContrato) "
