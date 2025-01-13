@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import ies.jandula.empleados.dtos.Consulta3y23;
+import ies.jandula.empleados.dtos.Consulta52;
 import ies.jandula.empleados.dtos.Consulta6Y15;
 import ies.jandula.empleados.models.Ubicaciones;
 
@@ -42,5 +43,11 @@ public interface UbicacionesRepository extends JpaRepository<Ubicaciones, BigDec
 	           "GROUP BY u.ciudad " +
 	           "HAVING COUNT(u.idUbicacion) > 2")
 	 List<Ubicaciones> obtenerCiudadesConMas2Ubicaciones();
+	 
+	 @Query("SELECT new ies.jandula.empleados.dtos.Consulta52(u.direccion, p.nombrePais, r.nombreRegion) "
+				+ "FROM Ubicaciones u "
+				+ "JOIN u.paises p "
+				+ "JOIN p.regiones r")
+	Page<Consulta52> mostrarDireccionNombreDePaisYRegion(Pageable pageable);
 
 }

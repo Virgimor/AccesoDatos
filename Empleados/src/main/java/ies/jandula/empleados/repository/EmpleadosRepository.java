@@ -21,6 +21,12 @@ import ies.jandula.empleados.dtos.Consulta38;
 import ies.jandula.empleados.dtos.Consulta39Y44;
 import ies.jandula.empleados.dtos.Consulta47;
 import ies.jandula.empleados.dtos.Consulta4Y16;
+import ies.jandula.empleados.dtos.Consulta51;
+import ies.jandula.empleados.dtos.Consulta52;
+import ies.jandula.empleados.dtos.Consulta53;
+import ies.jandula.empleados.dtos.Consulta54;
+import ies.jandula.empleados.dtos.Consulta55;
+import ies.jandula.empleados.dtos.Consulta56;
 import ies.jandula.empleados.dtos.Consulta5Y26;
 import ies.jandula.empleados.dtos.Consulta9;
 import ies.jandula.empleados.models.Empleados;
@@ -147,5 +153,39 @@ public interface EmpleadosRepository extends JpaRepository<Empleados, BigDecimal
 			+ "GROUP BY p.tituloPuesto "
 			+ "HAVING AVG(e.salario) >= 6000")
 	Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(Pageable pageable);
+	
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta51(e.nombre, p.tituloPuesto, d.nombreDepartamento) "
+			+ "FROM Empleados e "
+			+ "JOIN e.puestos p "
+			+ "JOIN e.departamentos d ")
+	Page<Consulta51> mostrarEmpleadosPuestosYNombreDepartamentoQuePertenecen(Pageable pageable);
+
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta53(e.nombre, g.nombre, d.nombreDepartamento) "
+			+ "FROM Empleados e "
+			+ "JOIN e.gerente g "
+			+ "JOIN e.departamentos d ")
+	Page<Consulta53> mostrarEmpleadosGerenteYNombreDepartamentoQuePertenecen(Pageable pageable);
+	
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta54(e.nombre, p.tituloPuesto, d.nombreDepartamento, u.direccion) "
+			+ "FROM Empleados e "
+			+ "JOIN e.puestos p "
+			+ "JOIN e.departamentos d "
+			+ "JOIN d.ubicaciones u ")
+	Page<Consulta54> mostrarEmpleadosPuestosYNombreDepartamentoYUbicaciones(Pageable pageable);
+	
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta55(e.nombre, pa.nombrePais, r.nombreRegion) "
+			+ "FROM Empleados e "
+			+ "JOIN e.puestos p "
+			+ "JOIN e.departamentos d "
+			+ "JOIN d.ubicaciones u "
+			+ "JOIN u.paises pa "
+			+ "JOIN pa.regiones r")
+	Page<Consulta55> listarEmpleadosPaisesYRegiones(Pageable pageable);
+	
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta56(p.tituloPuesto, e.nombre, d.nombreDepartamento) "
+			+ "FROM Empleados e "
+			+ "JOIN e.puestos p "
+			+ "JOIN e.departamentos d ") 
+	Page<Consulta56> mostrarPuestosEmpleadosYDepartamentosOrdenadosPorSalario(Pageable pageable);
 	
 }
