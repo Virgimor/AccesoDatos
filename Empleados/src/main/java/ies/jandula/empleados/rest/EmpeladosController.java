@@ -25,8 +25,19 @@ import ies.jandula.empleados.dtos.Consulta52;
 import ies.jandula.empleados.dtos.Consulta53;
 import ies.jandula.empleados.dtos.Consulta54;
 import ies.jandula.empleados.dtos.Consulta55;
+import ies.jandula.empleados.dtos.Consulta56;
+import ies.jandula.empleados.dtos.Consulta57;
+import ies.jandula.empleados.dtos.Consulta58;
+import ies.jandula.empleados.dtos.Consulta59;
 import ies.jandula.empleados.dtos.Consulta5Y26;
+import ies.jandula.empleados.dtos.Consulta60;
+import ies.jandula.empleados.dtos.Consulta61;
+import ies.jandula.empleados.dtos.Consulta63;
+import ies.jandula.empleados.dtos.Consulta64;
+import ies.jandula.empleados.dtos.Consulta65;
+import ies.jandula.empleados.models.Empleados;
 import ies.jandula.empleados.repository.EmpleadosRepository;
+import ies.jandula.empleados.repository.HistorialPuestosRepository;
 import ies.jandula.empleados.repository.PaisesRepository;
 import ies.jandula.empleados.repository.PuestosRepository;
 import ies.jandula.empleados.repository.UbicacionesRepository;
@@ -45,8 +56,8 @@ public class EmpeladosController {
 	@Autowired
 	private EmpleadosRepository empleadosRepository;
 	
-//	@Autowired
-//	private HistorialPuestosRepository historialPuestosRepository ;
+	@Autowired
+	private HistorialPuestosRepository historialPuestosRepository ;
 	
 	@Autowired
 	private PaisesRepository paisesRepository;
@@ -244,88 +255,88 @@ public class EmpeladosController {
 		
 	}
 	
-////	56. Mostrar todos los puestos, empleados y departamentos ordenados por salario.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
-//	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
-//		
-//	}
-//	
-////	57. Obtener empleados, nombre de departamento y país en una sola consulta.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
-//	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
-//		
-//	}
-//	
-////	58. Mostrar la cantidad de empleados por puesto y el departamento correspondiente.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
-//	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
-//		
-//	}
-//	
-////	59. Obtener los salarios más altos en cada departamento y el nombre del gerente.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
-//	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
-//		
-//	}
-//	
-////	60. Listar empleados agrupados por región y contar la cantidad en cada región.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
-//	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
-//		
-//	}
-//	
-////	61. Obtener empleados que trabajan en departamentos ubicados en países de la región "Asia".
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
-//	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
-//		
-//	}
-//	
-////	62. Listar empleados cuyo salario supera el salario promedio de todos los empleados.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
-//	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
-//		
-//	}
-//	
-////	63. Mostrar empleados y los detalles históricos de los puestos que han tenido.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
-//	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
-//		
-//	}
-//	
-////	64. Obtener el historial de empleados y mostrar los nombres actuales de los puestos.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
-//	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
-//		
-//	}
-//	
-////	65. Listar empleados que hayan cambiado de puesto más de una vez.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
-//	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
-//		
-//	}
-//	
+//	56. Mostrar todos los puestos, empleados y departamentos ordenados por salario.
+	@GetMapping("/consulta56")
+	public Page<Consulta56> mostrarPuestosEmpleadosYDepartamentosOrdenadosPorSalario(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.mostrarPuestosEmpleadosYDepartamentosOrdenadosPorSalario(pageable);
+		
+	}
+	
+//	57. Obtener empleados, nombre de departamento y país en una sola consulta.
+	@GetMapping("/consulta57")
+	public Page<Consulta57> obtenerEmpleadosNombreDepartamentoYPais(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.obtenerEmpleadosNombreDepartamentoYPais(pageable);
+		
+	}
+	
+//	58. Mostrar la cantidad de empleados por puesto y el departamento correspondiente.
+	@GetMapping("/consulta58")
+	public Page<Consulta58> mostrarCantidadEmpleadosPorPuestoYNombreDepartamento(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.mostrarCantidadEmpleadosPorPuestoYNombreDepartamento(pageable);
+		
+	}
+	
+//	59. Obtener los salarios más altos en cada departamento y el nombre del gerente.
+	@GetMapping("/consulta59")
+	public Page<Consulta59> sarioMasAltoPorDepartamentoYNombreGerente(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.sarioMasAltoPorDepartamentoYNombreGerente(pageable);
+		
+	}
+	
+//	60. Listar empleados agrupados por región y contar la cantidad en cada región.
+	@GetMapping("/consulta60")
+	public Page<Consulta60> listarEmpleadosPorRegionYSuCantidad(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.listarEmpleadosPorRegionYSuCantidad(pageable);
+		
+	}
+	
+//	61. Obtener empleados que trabajan en departamentos ubicados en países de la región "Asia".
+	@GetMapping("/consulta61")
+	public Page<Consulta61> obtenerEmpleadosCuandoDepartamentoUbicadoRegionAsia(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.obtenerEmpleadosCuandoDepartamentoUbicadoRegionAsia("Américas", pageable);
+		
+	}
+	
+//	62. Listar empleados cuyo salario supera el salario promedio de todos los empleados.
+	@GetMapping("/consulta62")
+	public Page<String> listarEmpleadosSalarioMayorALaMediaDeTodos(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.listarEmpleadosSalarioMayorALaMediaDeTodos(pageable);
+		
+	}
+	
+//	63. Mostrar empleados y los detalles históricos de los puestos que han tenido.
+	@GetMapping("/consulta63")
+	public Page<Consulta63> mostrarEmpleadosYElHistoricoDeSusPuestos(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.mostrarEmpleadosYElHistoricoDeSusPuestos(pageable);
+		
+	}
+	
+//	64. Obtener el historial de empleados y mostrar los nombres actuales de los puestos.
+	@GetMapping("/consulta64")
+	public Page<Consulta64> mostrarHistoricoConNombrePuestos(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.historialPuestosRepository.mostrarHistoricoConNombrePuestos(pageable);
+		
+	}
+	
+//	65. Listar empleados que hayan cambiado de puesto más de una vez.
+	@GetMapping("/consulta65")
+	public Page<String> listarEmpleadosQueHanCambiadoPuestoMasDeUnaVez(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.listarEmpleadosQueHanCambiadoPuestoMasDeUnaVez(pageable);
+		
+	}
+	
 ////	66. Obtener empleados cuyo salario es menor que el salario máximo de su puesto.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
+//	@GetMapping("/consulta66")
 //	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
 //		
 //		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
@@ -333,7 +344,7 @@ public class EmpeladosController {
 //	}
 //	
 ////	67. Mostrar empleados que tengan asignado un gerente cuyo salario sea menor que el suyo.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
+//	@GetMapping("/consulta67")
 //	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
 //		
 //		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
@@ -341,7 +352,7 @@ public class EmpeladosController {
 //	}
 //	
 ////	68. Listar los departamentos sin empleados asignados.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
+//	@GetMapping("/consulta68")
 //	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
 //		
 //		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
@@ -349,7 +360,7 @@ public class EmpeladosController {
 //	}
 //	
 ////	69. Mostrar países sin ubicaciones registradas.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
+//	@GetMapping("/consulta69")
 //	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
 //		
 //		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
@@ -357,7 +368,7 @@ public class EmpeladosController {
 //	}
 //	
 ////	70. Obtener gerentes que tengan empleados cuyo salario supera 10000.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
+//	@GetMapping("/consulta70")
 //	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
 //		
 //		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
@@ -365,7 +376,7 @@ public class EmpeladosController {
 //	}
 //	
 ////	71. Listar empleados cuyo salario es el máximo en su departamento.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
+//	@GetMapping("/consulta71")
 //	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
 //		
 //		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
@@ -373,7 +384,7 @@ public class EmpeladosController {
 //	}
 //	
 ////	72. Mostrar departamentos donde todos los empleados ganan más de 5000.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
+//	@GetMapping("/consulta72")
 //	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
 //		
 //		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
@@ -381,7 +392,7 @@ public class EmpeladosController {
 //	}
 //	
 ////	73. Obtener empleados con el salario más bajo de su puesto.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
+//	@GetMapping("/consulta73")
 //	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
 //		
 //		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
@@ -389,7 +400,7 @@ public class EmpeladosController {
 //	}
 //	
 ////	74. Mostrar los departamentos cuyo salario promedio supera el salario promedio de todos los departamentos.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
+//	@GetMapping("/consulta74")
 //	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
 //		
 //		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
@@ -397,7 +408,7 @@ public class EmpeladosController {
 //	}
 //	
 ////	75. Obtener empleados que trabajan en departamentos ubicados en países sin empleados asignados.
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
+//	@GetMapping("/consulta75")
 //	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
 //		
 //		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
@@ -405,7 +416,7 @@ public class EmpeladosController {
 //	}
 //	
 ////	76. Listar empleados con el
-//	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
+//	@GetMapping("/consulta76")
 //	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
 //		
 //		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);

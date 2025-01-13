@@ -27,7 +27,15 @@ import ies.jandula.empleados.dtos.Consulta53;
 import ies.jandula.empleados.dtos.Consulta54;
 import ies.jandula.empleados.dtos.Consulta55;
 import ies.jandula.empleados.dtos.Consulta56;
+import ies.jandula.empleados.dtos.Consulta57;
+import ies.jandula.empleados.dtos.Consulta58;
+import ies.jandula.empleados.dtos.Consulta59;
 import ies.jandula.empleados.dtos.Consulta5Y26;
+import ies.jandula.empleados.dtos.Consulta60;
+import ies.jandula.empleados.dtos.Consulta61;
+import ies.jandula.empleados.dtos.Consulta63;
+import ies.jandula.empleados.dtos.Consulta64;
+import ies.jandula.empleados.dtos.Consulta65;
 import ies.jandula.empleados.dtos.Consulta9;
 import ies.jandula.empleados.models.Empleados;
 
@@ -185,7 +193,76 @@ public interface EmpleadosRepository extends JpaRepository<Empleados, BigDecimal
 	@Query("SELECT new ies.jandula.empleados.dtos.Consulta56(p.tituloPuesto, e.nombre, d.nombreDepartamento) "
 			+ "FROM Empleados e "
 			+ "JOIN e.puestos p "
-			+ "JOIN e.departamentos d ") 
+			+ "JOIN e.departamentos d "
+			+ "ORDER BY e.salario") 
 	Page<Consulta56> mostrarPuestosEmpleadosYDepartamentosOrdenadosPorSalario(Pageable pageable);
+	
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta57(e.nombre, d.nombreDepartamento, p.nombrePais) "
+			+ "FROM Empleados e "
+			+ "JOIN e.departamentos d "
+			+ "JOIN d.ubicaciones u "
+			+ "JOIN u.paises p ") 
+	Page<Consulta57> obtenerEmpleadosNombreDepartamentoYPais(Pageable pageable);
+	
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta58(COUNT(e.idEmpleado), p.tituloPuesto, d.nombreDepartamento) "
+			+ "FROM Empleados e "
+			+ "JOIN e.departamentos d "
+			+ "JOIN e.puestos p "
+			+ "GROUP BY p.idPuesto") 
+	Page<Consulta58> mostrarCantidadEmpleadosPorPuestoYNombreDepartamento(Pageable pageable);
+	
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta59(e.salario, d.nombreDepartamento, g.nombre) "
+			+ "FROM Empleados e "
+			+ "JOIN e.departamentos d "
+			+ "JOIN e.gerente g "
+			+ "ORDER BY e.salario DESC") 
+	Page<Consulta59> sarioMasAltoPorDepartamentoYNombreGerente(Pageable pageable);
+	
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta60(r.nombreRegion, COUNT(e.idEmpleado)) "
+			+ "FROM Empleados e "
+			+ "JOIN e.departamentos d "
+			+ "JOIN d.ubicaciones u "
+			+ "JOIN u.paises p "
+			+ "JOIN p.regiones r "
+			+ "GROUP BY r.idRegion ") 
+	Page<Consulta60> listarEmpleadosPorRegionYSuCantidad(Pageable pageable);
+	
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta61(e.nombre, r.nombreRegion) "
+			+ "FROM Empleados e "
+			+ "JOIN e.departamentos d "
+			+ "JOIN d.ubicaciones u "
+			+ "JOIN u.paises p "
+			+ "JOIN p.regiones r "
+			+ "WHERE r.nombreRegion = :nombreRegion") 
+	Page<Consulta61> obtenerEmpleadosCuandoDepartamentoUbicadoRegionAsia( String nombreRegion, Pageable pageable);
+	
+	@Query("SELECT e.nombre "
+			+ "FROM Empleados e "
+			+ "WHERE e.salario > ( "
+				+ "SELECT AVG(e2.salario) "
+				+ "FROM Empleados e2)") 
+	Page<String> listarEmpleadosSalarioMayorALaMediaDeTodos(Pageable pageable);
+	
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta63(e.nombre, h.historialPuestosId.fechaInicio, h.fechaFin, h.puestos.idPuesto, h.departamentos.idDepartamento) "
+			+ "FROM Empleados e "
+			+ "JOIN e.listaHistorialPuestos h") 
+	Page<Consulta63> mostrarEmpleadosYElHistoricoDeSusPuestos(Pageable pageable);
+	
+//	@Query("SELECT e.nombre "
+//			+ "FROM Empleados e "
+//			+ "JOIN e.listaHistorialPuestos h "
+//			+ "WHERE h.empleados.idEmpleado = "
+//			+ "(SELECT COUNT(h2.empleados.idEmpleado) "
+//			+ "FROM HistorialPuestos h2)") 
+	@Query("SELECT e.nombre "
+			+ "FROM Empleados e "
+			+ "JOIN e.listaHistorialPuestos h "
+			+ "GROUP BY e.idEmpleado "
+			+ "HAVING COUNT(h.empleados.idEmpleado) = 2 ")
+	Page<String> listarEmpleadosQueHanCambiadoPuestoMasDeUnaVez(Pageable pageable);
+	
+	
+	
+	
 	
 }
