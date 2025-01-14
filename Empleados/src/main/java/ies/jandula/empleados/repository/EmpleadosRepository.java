@@ -36,6 +36,9 @@ import ies.jandula.empleados.dtos.Consulta61;
 import ies.jandula.empleados.dtos.Consulta63;
 import ies.jandula.empleados.dtos.Consulta64;
 import ies.jandula.empleados.dtos.Consulta65;
+import ies.jandula.empleados.dtos.Consulta67;
+import ies.jandula.empleados.dtos.Consulta70;
+import ies.jandula.empleados.dtos.Consulta71;
 import ies.jandula.empleados.dtos.Consulta9;
 import ies.jandula.empleados.models.Empleados;
 
@@ -137,7 +140,7 @@ public interface EmpleadosRepository extends JpaRepository<Empleados, BigDecimal
 			+ "ORDER BY e.apellido ASC")
 	List<Consulta17Y30> encontrarNombreYApellidosEmpleadosSinGerenteOrdenadosAlfabeticamente();
 	
-	@Query("SELECT DISTINCT new ies.jandula.empleados.dtos.Consulta38(COUNT(e.idEmpleado), e.fechaContrato) "
+	@Query("SELECT DISTINCT new ies.jandula.empleados.dtos.Consulta38(COUNT(e.idEmpleado), YEAR(e.fechaContrato)) "
 			+ "FROM Empleados e "
 			+ "GROUP BY e.fechaContrato")
 	Page<Consulta38> obtenerEmpleadosContratadosEnCadaAnio(Pageable pageable);
@@ -248,12 +251,6 @@ public interface EmpleadosRepository extends JpaRepository<Empleados, BigDecimal
 			+ "JOIN e.listaHistorialPuestos h") 
 	Page<Consulta63> mostrarEmpleadosYElHistoricoDeSusPuestos(Pageable pageable);
 	
-//	@Query("SELECT e.nombre "
-//			+ "FROM Empleados e "
-//			+ "JOIN e.listaHistorialPuestos h "
-//			+ "WHERE h.empleados.idEmpleado = "
-//			+ "(SELECT COUNT(h2.empleados.idEmpleado) "
-//			+ "FROM HistorialPuestos h2)") 
 	@Query("SELECT e.nombre "
 			+ "FROM Empleados e "
 			+ "JOIN e.listaHistorialPuestos h "
@@ -261,8 +258,37 @@ public interface EmpleadosRepository extends JpaRepository<Empleados, BigDecimal
 			+ "HAVING COUNT(h.empleados.idEmpleado) = 2 ")
 	Page<String> listarEmpleadosQueHanCambiadoPuestoMasDeUnaVez(Pageable pageable);
 	
+//	@Query("SELECT e.nombre "
+//			+ "FROM Empleados e "
+//			+ "JOIN e.puestos p "
+//			+ "WHERE e.salario < "
+//				+ "(SELECT p2.salarioMax "
+//				+ "FROM Puestos p2 "
+//				+ "WHERE p.idPuesto = p2.idPuesto)")
+	@Query("SELECT e.nombre "
+			+ "FROM Empleados e "
+			+ "JOIN e.puestos p "
+			+ "WHERE e.salario < e.puestos.salarioMax")
+	Page<String> obtenerEmpleadosConSalarioMenorSalarioMaximoDelPuesto(Pageable pageable);
+
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta67(e.nombre, e.salario, g.nombre, g.salario) "
+			+ "FROM Empleados e "
+			+ "JOIN e.gerente g "
+			+ "WHERE e.salario > g.salario")
+	Page<Consulta67> mostrarEmpleadosCuyoGerenteTengaSalarioMenor(Pageable pageable);
 	
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta70(g.nombre, e.nombre, e.salario) "
+			+ "FROM Empleados e "
+			+ "JOIN e.gerente g "
+			+ "WHERE e.salario > 10000")
+	Page<Consulta70> obtenerGerentesConEmpleadosCuyoSalarioMayor10000(Pageable pageable);
 	
-	
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta71(d.nombreDepartamento, e.nombre, e.salario) "
+			+ "FROM Empleados e "
+			+ "JOIN e.departamentos d "
+			+ "WHERE e.salario = "
+			+ "(SELECT MAX(e2.salario) "
+			+ "FROM Empleados e2)")
+	Page<Consulta71> listarEmpleadosCuyoSarlarioMaximoDelDepartamento(Pageable pageable);
 	
 }

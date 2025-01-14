@@ -12,6 +12,7 @@ import ies.jandula.empleados.dtos.Consulta13;
 import ies.jandula.empleados.dtos.Consulta2Y22;
 import ies.jandula.empleados.dtos.Consulta33Y46;
 import ies.jandula.empleados.dtos.Consulta49;
+import ies.jandula.empleados.dtos.Consulta67;
 import ies.jandula.empleados.models.Paises;
 
 public interface PaisesRepository extends JpaRepository<Paises, Character>{
@@ -54,5 +55,18 @@ public interface PaisesRepository extends JpaRepository<Paises, Character>{
 			+ "GROUP BY p.nombrePais "
 			+ "HAVING COUNT(e.idEmpleado) > 3")
 	List<Consulta49> mostrarPaisesConMas3Empleados();
+	
+//	@Query("SELECT p.nombrePais "
+//			+ "FROM Paises p "
+//			+ "WHERE NOT EXISTS "
+//				+ "(SELECT u.paises.id "
+//				+ "FROM Ubicaciones u "
+//				+ "WHERE u.paises.idPais = p.idPais)")
+	@Query("SELECT p.nombrePais "
+			+ "FROM Paises p "
+			+ "WHERE p.idPais NOT IN "
+				+ "(SELECT u.paises.id "
+				+ "FROM Ubicaciones u)")
+	Page<String> mostrarPaisesSinUbicaciones(Pageable pageable);
 
 }

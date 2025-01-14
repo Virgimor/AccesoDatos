@@ -11,11 +11,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Consulta67 {
 	
-	private BigDecimal cantidadEmpleado;
+	private String nombreEmpleado;
 
-	private String nombreDepartamento;
+	private BigDecimal salarioEmpleado;
 
 	private String nombreGerente;
+
+	private BigDecimal salarioGerente;
+
 
 	
 }
