@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Consulta64 {
 	
-	private BigDecimal nombreEmpleado;
+	private BigDecimal idEmpleado;
 
 	private Date fechaInicio;
 

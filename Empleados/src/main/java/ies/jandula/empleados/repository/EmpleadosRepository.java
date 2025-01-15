@@ -22,7 +22,6 @@ import ies.jandula.empleados.dtos.Consulta39Y44;
 import ies.jandula.empleados.dtos.Consulta47;
 import ies.jandula.empleados.dtos.Consulta4Y16;
 import ies.jandula.empleados.dtos.Consulta51;
-import ies.jandula.empleados.dtos.Consulta52;
 import ies.jandula.empleados.dtos.Consulta53;
 import ies.jandula.empleados.dtos.Consulta54;
 import ies.jandula.empleados.dtos.Consulta55;
@@ -34,13 +33,12 @@ import ies.jandula.empleados.dtos.Consulta5Y26;
 import ies.jandula.empleados.dtos.Consulta60;
 import ies.jandula.empleados.dtos.Consulta61;
 import ies.jandula.empleados.dtos.Consulta63;
-import ies.jandula.empleados.dtos.Consulta64;
-import ies.jandula.empleados.dtos.Consulta65;
 import ies.jandula.empleados.dtos.Consulta67;
 import ies.jandula.empleados.dtos.Consulta70;
 import ies.jandula.empleados.dtos.Consulta71;
 import ies.jandula.empleados.dtos.Consulta76;
 import ies.jandula.empleados.dtos.Consulta77;
+import ies.jandula.empleados.dtos.Consulta83;
 import ies.jandula.empleados.dtos.Consulta9;
 import ies.jandula.empleados.models.Empleados;
 
@@ -316,22 +314,13 @@ public interface EmpleadosRepository extends JpaRepository<Empleados, BigDecimal
 			+ "FROM Empleados e "
 			+ "JOIN e.departamentos d "
 			+ "JOIN d.ubicaciones u "
-			+ "WHERE u.paises.idPais not in "
+			+ "WHERE u.paises.idPais in "
 				+ "(SELECT p.idPais "
 				+ "FROM Paises p "
 				+ "WHERE p.idPais NOT IN "
 					+ "(SELECT u.paises.idPais "
 					+ "FROM Ubicaciones u))")
 	Page<String> obatenerEmpleadosTrabajanEnDepartamentosEnPaisesSinEmpleados(Pageable pageable);
-	
-//	select distinct u.id_pais from empleados e join departamentos d on (e.id_departamento = d.id_departamento) join ubicaciones u on (d.id_ubicacion = u.id_ubicacion) where u.id_pais not in
-//	(select p.id_pais from paises p where p.id_pais NOT IN (select u.id_pais from ubicaciones u)) ;
-	
-//	SELECT p.id_pais
-//	FROM empleados e right JOIN departamentos d ON d.id_departamento=e.id_departamento
-//							  JOIN ubicaciones u ON d.id_ubicacion= u.id_ubicacion
-//						right JOIN paises p ON p.id_pais=u.id_pais
-//	WHERE  u.id_pais is null;
 	
 	@Query("SELECT DISTINCT new ies.jandula.empleados.dtos.Consulta76(e.nombre, p.nombrePais, e.salario) "
 			+ "FROM Empleados e "
@@ -349,5 +338,58 @@ public interface EmpleadosRepository extends JpaRepository<Empleados, BigDecimal
 			+ "JOIN e.gerente g "
 			+ "WHERE e.fechaContrato<g.fechaContrato")
 	Page<Consulta77> mostrarEmpleadosContratadosDespuesDeSuGerente(Pageable pageable);
+
+	@Query("SELECT e.nombre "
+			+ "FROM Empleados e "
+			+ "WHERE e.puestos.salarioMax > 20000")
+	Page<String> listarEmpleadosConPuestosCuyoSalarioMaximoEsMayor20000(Pageable pageable);
+	
+	@Query("SELECT e.nombre "
+			+ "FROM Empleados e "
+			+ "JOIN e.puestos p "
+			+ "WHERE e.puestos.idPuesto IN "
+				+ "(SELECT p.idPuesto "
+				+ "FROM Empleados e2 "
+				+ "GROUP BY e2.puestos.idPuesto)")
+	Page<String> mostrarEmpleadosEnPuestosDondeNingunOtroEmpleadoHaTrabajado(Pageable pageable);
+	
+	@Query("SELECT e.nombre "
+			+ "FROM Empleados e "
+			+ "JOIN e.listaHistorialPuestos h "
+			+ "GROUP BY e.idEmpleado "
+			+ "HAVING COUNT(h.empleados.idEmpleado) > 1 ")
+	Page<String> mostrarEmpleadosQueHanTenidoMasDe3CambiosDePusto(Pageable pageable);
+	
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta83(e.nombre, hp.puestos.tituloPuesto, hp.departamentos.nombreDepartamento) "
+			+ "FROM Empleados e "
+			+ "JOIN e.listaHistorialPuestos hp "
+			+ "WHERE hp.historialPuestosId.fechaInicio = "
+				+ "(SELECT MIN(hp2.historialPuestosId.fechaInicio) "
+				+ "FROM HistorialPuestos hp2 "
+				+ "WHERE hp2.empleados.idEmpleado = e.idEmpleado)")
+	Page<Consulta83> listarEmpleadosActualesJuntoConElPrimerPuestosYDepartamentoQueOcuparon(Pageable pageable);
+	
+	@Query("SELECT e.nombre "
+			+ "FROM Empleados e "
+			+ "WHERE e.salario > "
+				+ "(SELECT e2.salario * 2 "
+				+ "From Empleados e2 "
+				+ "WHERE e.idEmpleado = e2.idEmpleado)")
+	Page<String> obtenerEmpleadosCuyoSalarioSuperaElDobleDelSalarioDeOtroEmpleado(Pageable pageable);
+	
+	@Query("SELECT  g.nombre "
+			+ "FROM Empleados e "
+			+ "JOIN e.gerente g "
+			+ "WHERE g.idEmpleado is not null AND e.salario = "
+				+ "(SELECT MAX(e2.salario) "
+				+ "From Empleados e2)")
+	Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(Pageable pageable);
+	
+	@Query("SELECT e.nombre "
+			+ "FROM Empleados e "
+			+ "JOIN e.listaHistorialPuestos hp "
+			+ "GROUP BY e.idEmpleado, e.departamentos.nombreDepartamento "
+			+ "HAVING COUNT(hp.empleados.idEmpleado) > 1 ")
+	Page<String> listarEmpleadoConMasConMasDeUnHistorialDePuestosEnElMismoDepartamento(Pageable pageable);
 	
 }

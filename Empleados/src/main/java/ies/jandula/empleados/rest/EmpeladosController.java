@@ -34,14 +34,14 @@ import ies.jandula.empleados.dtos.Consulta60;
 import ies.jandula.empleados.dtos.Consulta61;
 import ies.jandula.empleados.dtos.Consulta63;
 import ies.jandula.empleados.dtos.Consulta64;
-import ies.jandula.empleados.dtos.Consulta65;
-import ies.jandula.empleados.dtos.Consulta66;
 import ies.jandula.empleados.dtos.Consulta67;
 import ies.jandula.empleados.dtos.Consulta70;
 import ies.jandula.empleados.dtos.Consulta71;
 import ies.jandula.empleados.dtos.Consulta74;
 import ies.jandula.empleados.dtos.Consulta76;
 import ies.jandula.empleados.dtos.Consulta77;
+import ies.jandula.empleados.dtos.Consulta81;
+import ies.jandula.empleados.dtos.Consulta83;
 import ies.jandula.empleados.models.Empleados;
 import ies.jandula.empleados.repository.DepartamentoRepository;
 import ies.jandula.empleados.repository.EmpleadosRepository;
@@ -80,7 +80,7 @@ public class EmpeladosController {
 	private UbicacionesRepository ubicacionesRepository;
 	
 //	1. Obtener todos los empleados y sus respectivos nombres de departamento.
-	@GetMapping("/encontrarEmpleadosConSusDepartamentos")
+	@GetMapping("/consulta1")
 	public Page<Consulta1Y11Y14Y20> encontrarEmpleadosConSusDepartamentos(@PageableDefault(size=10, page=0) Pageable pageable){
 		
 		return this.empleadosRepository.encontrarEmpleadosConSusDepartamentos(pageable);
@@ -88,7 +88,7 @@ public class EmpeladosController {
 	}
 	
 //	2. Listar los nombres de los países y su nombre de región asociado.
-	@GetMapping("/encontrarPaisesYNombreRegion")
+	@GetMapping("/consulta2")
 	public Page<Consulta2Y22> encontrarPaisesYNombreRegion(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.paisesRepository.encontrarPaisesYNombreRegion(pageable);
@@ -96,7 +96,7 @@ public class EmpeladosController {
 	}
 	
 //	3. Mostrar los nombres de las ubicaciones junto con las ciudades y países a las que pertenecen.
-	@GetMapping("/encontrarUbicacionConCiudadYPais")
+	@GetMapping("/consulta3")
 	public Page<Consulta3y23> encontrarUbicacionConCiudadYPais(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.ubicacionesRepository.encontrarUbicacionConCiudadYPais(pageable);
@@ -104,7 +104,7 @@ public class EmpeladosController {
 	}
 	
 //	4. Obtener los nombres y apellidos de los empleados junto con sus títulos de puesto.
-	@GetMapping("/encontrarNombreYApellidosEmpleadosConNombrePuesto")
+	@GetMapping("/consulta4")
 	public Page<Consulta4Y16> encontrarNombreYApellidosEmpleadosConNombrePuesto(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.empleadosRepository.encontrarNombreYApellidosEmpleadosConNombrePuesto(pageable);
@@ -112,7 +112,7 @@ public class EmpeladosController {
 	}
 	
 //	5. Mostrar los nombres y apellidos de los empleados y sus respectivos gerentes (nombre y apellidos).
-	@GetMapping("/encontrarNombreYApellidosEmpleadosConNombreYApellidosDelGerente")
+	@GetMapping("/consulta5")
 	public Page<Consulta5Y26> encontrarNombreYApellidosEmpleadosConNombreYApellidosDelGerente(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.empleadosRepository.encontrarNombreYApellidosEmpleadosConNombreYApellidosDelGerente(pageable);
@@ -120,7 +120,7 @@ public class EmpeladosController {
 	}
 	
 //	11. Obtener los empleados cuyo salario es mayor a 5000 junto con el nombre del departamento.
-	@GetMapping("/encontrarEmpleadosConSueldoMayor5000ConSusDepartamentos")
+	@GetMapping("/consulta11")
 	public Page<Consulta1Y11Y14Y20> encontrarEmpleadosConSueldoMayor5000ConSusDepartamentos(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.empleadosRepository.encontrarEmpleadosConSueldoMayor5000ConSusDepartamentos(pageable);
@@ -128,7 +128,7 @@ public class EmpeladosController {
 	}
 	
 //	19. Obtener empleados con comisiones asignadas y sus departamentos.;
-	@GetMapping("/encontrarEmpleadosConComisionesYDepartamentos")
+	@GetMapping("/consulta19")
 	public Page<Consulta19> encontrarEmpleadosConComisionesYDepartamentos(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.empleadosRepository.encontrarEmpleadosConComisionesYDepartamentos(pageable);
@@ -136,7 +136,7 @@ public class EmpeladosController {
 	}
 	
 //	20. Mostrar empleados del departamento \"Ventas\" que ganan más de 7000.
-	@GetMapping("/encontrarEmpleadosDeVentasQueGananMas7000")
+	@GetMapping("/consulta20")
 	public Page<Consulta1Y11Y14Y20> encontrarEmpleadosDeVentasQueGananMas7000(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.empleadosRepository.encontrarEmpleadosDeVentasQueGananMas7000(pageable);
@@ -144,7 +144,7 @@ public class EmpeladosController {
 	}
 	
 //	21. Listar empleados ordenados por salario descendente y nombre del departamento.
-	@GetMapping("/encontrarEmpleadosOrdenadosPorSalarioDescYNombreDepartamentos")
+	@GetMapping("/consulta21")
 	public Page<Consulta21> encontrarEmpleadosOrdenadosPorSalarioDescYNombreDepartamentos(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.empleadosRepository.encontrarEmpleadosOrdenadosPorSalarioDescYNombreDepartamentos(pageable);
@@ -152,7 +152,7 @@ public class EmpeladosController {
 	}
 	
 //	22. Mostrar países ordenados por el nombre de la región a la que pertenecen.
-	@GetMapping("/encontrarPaisesOrdenadorPorNombreRegion")
+	@GetMapping("/consulta22")
 	public Page<Consulta2Y22> encontrarPaisesOrdenadorPorNombreRegion(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.paisesRepository.encontrarPaisesOrdenadorPorNombreRegion(pageable);
@@ -160,7 +160,7 @@ public class EmpeladosController {
 	}
 	
 //	23. Listar ubicaciones ordenadas por ciudad ascendente y nombre del país.
-	@GetMapping("/encontrarUbicacionOrdenadaPorCiudadAscYNombrePais")
+	@GetMapping("/consulta23")
 	public Page<Consulta3y23> encontrarUbicacionOrdenadaPorCiudadAscYNombrePais(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.ubicacionesRepository.encontrarUbicacionOrdenadaPorCiudadAscYNombrePais(pageable);
@@ -168,7 +168,7 @@ public class EmpeladosController {
 	}
 	
 //	24. Mostrar empleados ordenados por fecha de contratación y salario	
-	@GetMapping("/encontrarEmpleadosOrdenadoPorFechaDeContratoYSalario")
+	@GetMapping("/consulta24")
 	public Page<Consulta24> encontrarEmpleadosOrdenadoPorFechaDeContratoYSalario(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.empleadosRepository.encontrarEmpleadosOrdenadoPorFechaDeContratoYSalario(pageable);
@@ -176,7 +176,7 @@ public class EmpeladosController {
 	}
 	
 //	26. Mostrar empleados y su gerente ordenados por el apellido del gerente.
-	@GetMapping("/encontrarNombreYApellidosEmpleadosConNombreYApellidosDelGerenteOrdenadosPorApellidoAsc")
+	@GetMapping("/consulta26")
 	public Page<Consulta5Y26> encontrarNombreYApellidosEmpleadosConNombreYApellidosDelGerenteOrdenadosPorApellidoAsc(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.empleadosRepository.encontrarNombreYApellidosEmpleadosConNombreYApellidosDelGerenteOrdenadosPorApellidoAsc(pageable);
@@ -184,7 +184,7 @@ public class EmpeladosController {
 	}
 	
 //	34. Mostrar la cantidad de empleados por título de puesto.
-	@GetMapping("/encontrarCantidadEmpleadosPorTituloPuesto")
+	@GetMapping("/consulta34")
 	public Page<Consulta34> encontrarCantidadEmpleadosPorTituloPuesto(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.puestosRepository.encontrarCantidadEmpleadosPorTituloPuesto(pageable);
@@ -200,7 +200,7 @@ public class EmpeladosController {
 	}
 	
 //	39. Listar empleados agrupados por gerente y contar cuántos empleados tiene cada uno.
-	@GetMapping("/listarEmpleadosAgrupadosPorGerenteYCuantosEmpleadosTiene")
+	@GetMapping("/consulta39")
 	public Page<Consulta39Y44> listarEmpleadosAgrupadosPorGerenteYCuantosEmpleadosTiene(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.empleadosRepository.listarEmpleadosAgrupadosPorGerenteYCuantosEmpleadosTiene(pageable);
@@ -208,7 +208,7 @@ public class EmpeladosController {
 	}
 	
 //	45. Obtener puestos con un salario mínimo mayor a 4000 y empleados asignados.
-	@GetMapping("/obtenerPuestosConSalarioMinimoMayor4000YEmpleadosAsignados")
+	@GetMapping("/consulta45")
 	public Page<Consulta45> obtenerPuestosConSalarioMinimoMayor4000YEmpleadosAsignados(@PageableDefault(size=2) Pageable pageable){
 		
 		return this.puestosRepository.obtenerPuestosConSalarioMinimoMayor4000YEmpleadosAsignados(pageable);
@@ -216,7 +216,7 @@ public class EmpeladosController {
 	}
 	
 //	47. Mostrar los empleados agrupados por puesto cuyo salario promedio supera 6000.
-	@GetMapping("/mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000")
+	@GetMapping("/consulta47")
 	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
@@ -224,7 +224,7 @@ public class EmpeladosController {
 	}
 	
 //	51. Listar empleados, sus puestos y el nombre de los departamentos a los que pertenecen.
-	@GetMapping("/mostrarEmpleadosPuestosYNombreDepartamentoQuePertenecen")
+	@GetMapping("/consulta51")
 	public Page<Consulta51> mostrarEmpleadosPuestosYNombreDepartamentoQuePertenecen(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.empleadosRepository.mostrarEmpleadosPuestosYNombreDepartamentoQuePertenecen(pageable);
@@ -240,7 +240,7 @@ public class EmpeladosController {
 	}
 	
 //	53. Obtener empleados con sus gerentes y el nombre del departamento.
-	@GetMapping("/mostrarEmpleadosGerenteYNombreDepartamentoQuePertenecen")
+	@GetMapping("/consulta53")
 	public Page<Consulta53> mostrarEmpleadosGerenteYNombreDepartamentoQuePertenecen(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.empleadosRepository.mostrarEmpleadosGerenteYNombreDepartamentoQuePertenecen(pageable);
@@ -248,7 +248,7 @@ public class EmpeladosController {
 	}
 	
 //	54. Mostrar empleados con sus puestos, departamentos y ubicaciones.
-	@GetMapping("/mostrarEmpleadosPuestosYNombreDepartamentoYUbicaciones")
+	@GetMapping("/consulta54")
 	public Page<Consulta54> mostrarEmpleadosPuestosYNombreDepartamentoYUbicaciones(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.empleadosRepository.mostrarEmpleadosPuestosYNombreDepartamentoYUbicaciones(pageable);
@@ -256,7 +256,7 @@ public class EmpeladosController {
 	}
 	
 //	55. Listar empleados, sus países y las regiones donde trabajan.
-	@GetMapping("/listarEmpleadosPaisesYRegiones")
+	@GetMapping("/consulta55")
 	public Page<Consulta55> listarEmpleadosPaisesYRegiones(@PageableDefault(size=10) Pageable pageable){
 		
 		return this.empleadosRepository.listarEmpleadosPaisesYRegiones(pageable);
@@ -448,20 +448,179 @@ public class EmpeladosController {
 	}
 	
 //	79. Listar empleados con puestos cuyo salario máximo es mayor que 20000.
-//	@GetMapping("/consulta79")
-//	public Page<Consulta76> listarEmpleadosConSalarioMasAltoDeSuPais(@PageableDefault(size=10) Pageable pageable){
+	@GetMapping("/consulta79")
+	public Page<String> listarEmpleadosConPuestosCuyoSalarioMaximoEsMayor20000(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.listarEmpleadosConPuestosCuyoSalarioMaximoEsMayor20000(pageable);
+		
+	}
+	
+//	80. Mostrar empleados en puestos donde ningún otro empleado ha trabajado.
+	@GetMapping("/consulta80")
+	public Page<String> mostrarEmpleadosEnPuestosDondeNingunOtroEmpleadoHaTrabajado(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.mostrarEmpleadosEnPuestosDondeNingunOtroEmpleadoHaTrabajado(pageable);
+		
+	}
+	
+//	81. Obtener el historial de puestos de empleados que han trabajado en más de un departamento.
+	@GetMapping("/consulta81")
+	public Page<Consulta81> obtenerHistorialDePuestosDeEmpleadosQueHanTrabajadoEnMasDeUnDepartamento(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.historialPuestosRepository.obtenerHistorialDePuestosDeEmpleadosQueHanTrabajadoEnMasDeUnDepartamento(pageable);
+		
+	}
+	
+//	82. Mostrar empleados que han tenido más de 3 cambios de puesto.
+	@GetMapping("/consulta82")
+	public Page<String> mostrarEmpleadosQueHanTenidoMasDe3CambiosDePusto(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.mostrarEmpleadosQueHanTenidoMasDe3CambiosDePusto(pageable);
+		
+	}
+	
+//	83. Listar empleados actuales junto con el primer puesto y departamento que ocuparon.
+	@GetMapping("/consulta83")
+	public Page<Consulta83> listarEmpleadosActualesJuntoConElPrimerPuestosYDepartamentoQueOcuparon(@PageableDefault(size=12) Pageable pageable){
+		
+		return this.empleadosRepository.listarEmpleadosActualesJuntoConElPrimerPuestosYDepartamentoQueOcuparon(pageable);
+		
+	}
+	
+//	84. Obtener empleados cuyo salario supera el doble del salario de algún otro empleado.
+	@GetMapping("/consulta84")
+	public Page<String> obtenerEmpleadosCuyoSalarioSuperaElDobleDelSalarioDeOtroEmpleado(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.obtenerEmpleadosCuyoSalarioSuperaElDobleDelSalarioDeOtroEmpleado(pageable);
+		
+	}
+	
+//	85. Mostrar gerentes cuyos empleados tienen el salario máximo de la empresa.
+	@GetMapping("/consulta85")
+	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
+		
+	}
+	
+//	86. Listar empleados con más de un historial de puesto en el mismo departamento.
+	@GetMapping("/consulta86")
+	public Page<String> listarEmpleadoConMasConMasDeUnHistorialDePuestosEnElMismoDepartamento(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.listarEmpleadoConMasConMasDeUnHistorialDePuestosEnElMismoDepartamento(pageable);
+		
+	}
+	
+//	87. Mostrar departamentos donde no se ha registrado ningún cambio de puesto.
+	@GetMapping("/consulta87")
+	public Page<String> mostrarDepartamentosDondeNoSeHaRegistradoNingunCambioDePuesto(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.departamentoRepository.mostrarDepartamentosDondeNoSeHaRegistradoNingunCambioDePuesto(pageable);
+		
+	}
+	
+//	88. Obtener empleados con títulos históricos diferentes al título actual.
+//	@GetMapping("/consulta88")
+//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
 //		
-//		return this.empleadosRepository.listarEmpleadosConSalarioMasAltoDeSuPais(pageable);
+//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
 //		
 //	}
 //	
-//	80. Mostrar empleados en puestos donde ningún otro empleado ha trabajado.
-//	@GetMapping("/consulta80")
-//	public Page<Consulta76> listarEmpleadosConSalarioMasAltoDeSuPais(@PageableDefault(size=10) Pageable pageable){
+//	89. Mostrar empleados cuyo salario actual es menor que el salario de algún puesto anterior.
+//	@GetMapping("/consulta89")
+//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
 //		
-//		return this.empleadosRepository.listarEmpleadosConSalarioMasAltoDeSuPais(pageable);
+//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
 //		
 //	}
-	
+//	
+//	90. Obtener la diferencia de salarios entre el puesto actual y el primer puesto ocupado.
+//	@GetMapping("/consulta90")
+//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
+//		
+//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
+//		
+//	}
+//	
+//	91. Obtener empleados que han trabajado en más de 2 departamentos diferentes.
+//	@GetMapping("/consulta91")
+//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
+//		
+//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
+//		
+//	}
+//	
+//	92. Mostrar empleados que han tenido más de un gerente a lo largo del tiempo.
+//	@GetMapping("/consulta92")
+//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
+//		
+//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
+//		
+//	}
+//	
+//	93. Listar empleados cuyo salario es mayor que el promedio del salario histórico de sus puestos.
+//	@GetMapping("/consulta93")
+//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
+//		
+//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
+//		
+//	}
+//	
+//	94. Obtener la suma de salarios históricos de los empleados.
+//	@GetMapping("/consulta94")
+//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
+//		
+//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
+//		
+//	}
+//	
+//	95. Mostrar empleados que hayan trabajado en puestos cuyo salario máximo es menor Que el suyo actual.
+//	@GetMapping("/consulta95")
+//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
+//		
+//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
+//		
+//	}
+//	
+//	96. Listar empleados que han trabajado en todos los departamentos de una región.
+//	@GetMapping("/consulta96")
+//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
+//		
+//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
+//		
+//	}
+//	
+//	97. Mostrar la cantidad de cambios de puesto por departamento en cada año.
+//	@GetMapping("/consulta97")
+//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
+//		
+//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
+//		
+//	}
+//	
+//	98. Obtener empleados con el salario más alto histórico registrado.
+//	@GetMapping("/consulta98")
+//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
+//		
+//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
+//		
+//	}
+//	
+//	99. Listar empleados con la cantidad de años trabajados en cada puesto.
+//	@GetMapping("/consulta99")
+//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
+//		
+//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
+//		
+//	}
+//	
+//	100. Mostrar empleados que hayan trabajado en más de 3 regiones distintas.
+//	@GetMapping("/consulta100")
+//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
+//		
+//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
+//		
+//	}
 	
 }

@@ -125,5 +125,12 @@ public interface DepartamentoRepository extends JpaRepository<Departamentos, Big
 				+ "WHERE d2.nombreDepartamento = 'Ventas' "
 				+ "GROUP BY d2.nombreDepartamento) ")
 	Page<String> obtenerDepartamentosConMasEmpleadosQueElDepartamentoVentas(Pageable pageable);
+	
+	@Query("SELECT d.nombreDepartamento "
+			+ "FROM Departamentos d "
+			+ "JOIN d.listaHistorialPuestos hp "
+			+ "GROUP BY hp.empleados.idEmpleado, d.nombreDepartamento "
+			+ "HAVING COUNT(hp.empleados.idEmpleado) < 2 ")
+	Page<String> mostrarDepartamentosDondeNoSeHaRegistradoNingunCambioDePuesto(Pageable pageable);
 
 }
