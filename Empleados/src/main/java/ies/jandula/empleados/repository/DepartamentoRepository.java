@@ -104,23 +104,26 @@ public interface DepartamentoRepository extends JpaRepository<Departamentos, Big
 				+ "WHERE e.departamentos = d AND e.salario <= 5000)")
 	Page<String> mostrarDepartamentosDondeTodosEmpleadosGanan5000(Pageable pageable);
 //	
-//	@Query("SELECT new ies.jandula.empleados.dtos.Consulta74(d.nombreDepartamento, AVG(e.salario)) "
-//			+ "FROM Departamentos d "
-//			+ "JOIN d.listaEmpleados e "
-//			+ "GROUP BY d.nombreDepartamento "
-//			+ "HAVING AVG(e.salario) > "
-//				+ "(SELECT AVG(e2.salario) "
-//				+ "FROM Empleados e2 "
-//				+ "GROUP BY d.nombreDepartamento)")
-//	Page<Consulta74> mostrarDepartamentosCuyoSalarioPromedioSuperaAlSalarioPromedioDeLosDemasDepartamentos(Pageable pageable);
 	@Query("SELECT new ies.jandula.empleados.dtos.Consulta74(d.nombreDepartamento, AVG(e.salario)) "
 			+ "FROM Departamentos d "
 			+ "JOIN d.listaEmpleados e "
 			+ "GROUP BY d.nombreDepartamento "
 			+ "HAVING AVG(e.salario) > "
-			+ "(SELECT AVG(e2.salario) "
-			+ "FROM Empleados e2 "
-			+ "GROUP BY d.nombreDepartamento)")
-	List<Consulta74> mostrarDepartamentosCuyoSalarioPromedioSuperaAlSalarioPromedioDeLosDemasDepartamentos();
+				+ "(SELECT AVG(e2.salario) "
+				+ "FROM Empleados e2 "
+				+ "GROUP BY d.nombreDepartamento)")
+	Page<Consulta74> mostrarDepartamentosCuyoSalarioPromedioSuperaAlSalarioPromedioDeLosDemasDepartamentos(Pageable pageable);
+	
+	@Query("SELECT d.nombreDepartamento "
+			+ "FROM Departamentos d "
+			+ "JOIN d.listaEmpleados e "
+			+ "GROUP BY d.nombreDepartamento "
+			+ "HAVING COUNT(e.idEmpleado) > "
+				+ "(SELECT COUNT(e2.idEmpleado ) "
+				+ "FROM Departamentos d2 "
+				+ "JOIN d2.listaEmpleados e2 "
+				+ "WHERE d2.nombreDepartamento = 'Ventas' "
+				+ "GROUP BY d2.nombreDepartamento) ")
+	Page<String> obtenerDepartamentosConMasEmpleadosQueElDepartamentoVentas(Pageable pageable);
 
 }

@@ -40,6 +40,7 @@ import ies.jandula.empleados.dtos.Consulta67;
 import ies.jandula.empleados.dtos.Consulta70;
 import ies.jandula.empleados.dtos.Consulta71;
 import ies.jandula.empleados.dtos.Consulta76;
+import ies.jandula.empleados.dtos.Consulta77;
 import ies.jandula.empleados.dtos.Consulta9;
 import ies.jandula.empleados.models.Empleados;
 
@@ -303,6 +304,35 @@ public interface EmpleadosRepository extends JpaRepository<Empleados, BigDecimal
 				+ "WHERE p.idPuesto = p2.idPuesto)")
 	Page<String> obtenerEmpleadosConElSalarioMásBajoDeSuPuesto(Pageable pageable);
 	
+//	@Query("SELECT p.nombrePais "
+//			+ "FROM Empleados e "
+//			+ "right JOIN e.departamentos d "
+//			+ "JOIN d.ubicaciones u "
+//			+ "right JOIN u.paises p "
+//			+ "WHERE u.paises is null ")
+//	Page<String> obatenerEmpleadosTrabajanEnDepartamentosEnPaisesSinEmpleados(Pageable pageable);
+
+	@Query("SELECT u.paises.nombrePais "
+			+ "FROM Empleados e "
+			+ "JOIN e.departamentos d "
+			+ "JOIN d.ubicaciones u "
+			+ "WHERE u.paises.idPais not in "
+				+ "(SELECT p.idPais "
+				+ "FROM Paises p "
+				+ "WHERE p.idPais NOT IN "
+					+ "(SELECT u.paises.idPais "
+					+ "FROM Ubicaciones u))")
+	Page<String> obatenerEmpleadosTrabajanEnDepartamentosEnPaisesSinEmpleados(Pageable pageable);
+	
+//	select distinct u.id_pais from empleados e join departamentos d on (e.id_departamento = d.id_departamento) join ubicaciones u on (d.id_ubicacion = u.id_ubicacion) where u.id_pais not in
+//	(select p.id_pais from paises p where p.id_pais NOT IN (select u.id_pais from ubicaciones u)) ;
+	
+//	SELECT p.id_pais
+//	FROM empleados e right JOIN departamentos d ON d.id_departamento=e.id_departamento
+//							  JOIN ubicaciones u ON d.id_ubicacion= u.id_ubicacion
+//						right JOIN paises p ON p.id_pais=u.id_pais
+//	WHERE  u.id_pais is null;
+	
 	@Query("SELECT DISTINCT new ies.jandula.empleados.dtos.Consulta76(e.nombre, p.nombrePais, e.salario) "
 			+ "FROM Empleados e "
 			+ "JOIN e.departamentos d "
@@ -314,10 +344,10 @@ public interface EmpleadosRepository extends JpaRepository<Empleados, BigDecimal
 			+ "GROUP BY p.nombrePais ")
 	Page<Consulta76> listarEmpleadosConSalarioMasAltoDeSuPais(Pageable pageable);
 	
-	@Query("SELECT new ies.jandula.empleados.dtos.Consulta70(g.nombre, e.nombre, e.salario) "
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta77(g.nombre, e.nombre, e.fechaContrato, g.fechaContrato) "
 			+ "FROM Empleados e "
 			+ "JOIN e.gerente g "
-			+ "WHERE e.salario > 10000")
-	Page<Consulta70> mostrarEmpleadosContratadosDespuesDeSuGerente(Pageable pageable);
+			+ "WHERE e.fechaContrato<g.fechaContrato")
+	Page<Consulta77> mostrarEmpleadosContratadosDespuesDeSuGerente(Pageable pageable);
 	
 }
