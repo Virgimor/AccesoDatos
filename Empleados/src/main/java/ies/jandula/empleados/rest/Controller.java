@@ -242,6 +242,10 @@ public class Controller {
 		System.out.println(this.ubicacionesRepository.obtenerCiudadesConMas2Ubicaciones());
 		System.out.println();
 		
+		System.out.println("74. Obtener las ciudades con más de 2 ubicaciones.");
+		System.out.println(this.departamentoRepository.mostrarDepartamentosCuyoSalarioPromedioSuperaAlSalarioPromedioDeLosDemasDepartamentos());
+		System.out.println();
+		
 	}
 
 }

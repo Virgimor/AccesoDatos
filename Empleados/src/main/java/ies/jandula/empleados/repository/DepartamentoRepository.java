@@ -13,6 +13,7 @@ import ies.jandula.empleados.dtos.Consulta32;
 import ies.jandula.empleados.dtos.Consulta37Y43;
 import ies.jandula.empleados.dtos.Consulta40;
 import ies.jandula.empleados.dtos.Consulta41;
+import ies.jandula.empleados.dtos.Consulta74;
 import ies.jandula.empleados.dtos.Consulta8;
 import ies.jandula.empleados.models.Departamentos;
 
@@ -91,7 +92,35 @@ public interface DepartamentoRepository extends JpaRepository<Departamentos, Big
 	
 	@Query("SELECT d.nombreDepartamento "
 			+ "FROM Departamentos d "
-			+ "WHERE d.idGerente is null")
+			+ "LEFT JOIN d.listaEmpleados e "
+			+ "WHERE e.idEmpleado is null")
 	Page<String> listarDepartamentosSinEmpleados(Pageable pageable);
+	
+	@Query("SELECT DISTINCT d.nombreDepartamento "
+			+ "FROM Departamentos d "
+			+ "WHERE NOT EXISTS "
+				+ "(SELECT e "
+				+ "FROM Empleados e "
+				+ "WHERE e.departamentos = d AND e.salario <= 5000)")
+	Page<String> mostrarDepartamentosDondeTodosEmpleadosGanan5000(Pageable pageable);
+//	
+//	@Query("SELECT new ies.jandula.empleados.dtos.Consulta74(d.nombreDepartamento, AVG(e.salario)) "
+//			+ "FROM Departamentos d "
+//			+ "JOIN d.listaEmpleados e "
+//			+ "GROUP BY d.nombreDepartamento "
+//			+ "HAVING AVG(e.salario) > "
+//				+ "(SELECT AVG(e2.salario) "
+//				+ "FROM Empleados e2 "
+//				+ "GROUP BY d.nombreDepartamento)")
+//	Page<Consulta74> mostrarDepartamentosCuyoSalarioPromedioSuperaAlSalarioPromedioDeLosDemasDepartamentos(Pageable pageable);
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta74(d.nombreDepartamento, AVG(e.salario)) "
+			+ "FROM Departamentos d "
+			+ "JOIN d.listaEmpleados e "
+			+ "GROUP BY d.nombreDepartamento "
+			+ "HAVING AVG(e.salario) > "
+			+ "(SELECT AVG(e2.salario) "
+			+ "FROM Empleados e2 "
+			+ "GROUP BY d.nombreDepartamento)")
+	List<Consulta74> mostrarDepartamentosCuyoSalarioPromedioSuperaAlSalarioPromedioDeLosDemasDepartamentos();
 
 }

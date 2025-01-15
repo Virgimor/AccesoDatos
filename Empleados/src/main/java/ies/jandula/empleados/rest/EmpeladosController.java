@@ -39,6 +39,8 @@ import ies.jandula.empleados.dtos.Consulta66;
 import ies.jandula.empleados.dtos.Consulta67;
 import ies.jandula.empleados.dtos.Consulta70;
 import ies.jandula.empleados.dtos.Consulta71;
+import ies.jandula.empleados.dtos.Consulta74;
+import ies.jandula.empleados.dtos.Consulta76;
 import ies.jandula.empleados.models.Empleados;
 import ies.jandula.empleados.repository.DepartamentoRepository;
 import ies.jandula.empleados.repository.EmpleadosRepository;
@@ -358,9 +360,9 @@ public class EmpeladosController {
 	
 //	68. Listar los departamentos sin empleados asignados.
 	@GetMapping("/consulta68")
-	public Page<String> listarDepartamentosSinEmpleados(@PageableDefault(size=10) Pageable pageable){
+	public Page<String> listarDepartamentosSinEmpleados(@PageableDefault(size=17) Pageable pageable){
 		
-		return this.departamentoRepository.listarDepartamentosSinEmpleados(pageable);
+		return this.departamentoRepository.listarDepartamentosSinEmpleados(pageable); //??
 		
 	}
 	
@@ -388,43 +390,75 @@ public class EmpeladosController {
 		
 	}
 	
-////	72. Mostrar departamentos donde todos los empleados ganan más de 5000.
-//	@GetMapping("/consulta72")
-//	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
-//		
-//	}
-//	
-////	73. Obtener empleados con el salario más bajo de su puesto.
-//	@GetMapping("/consulta73")
-//	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
-//		
-//	}
-//	
-////	74. Mostrar los departamentos cuyo salario promedio supera el salario promedio de todos los departamentos.
+//	72. Mostrar departamentos donde todos los empleados ganan más de 5000.
+	@GetMapping("/consulta72")
+	public Page<String> mostrarDepartamentosDondeTodosEmpleadosGanan5000(@PageableDefault(size=28) Pageable pageable){
+		
+		return this.departamentoRepository.mostrarDepartamentosDondeTodosEmpleadosGanan5000(pageable);
+		
+	}
+	
+//	73. Obtener empleados con el salario más bajo de su puesto.
+	@GetMapping("/consulta73")
+	public Page<String> obtenerEmpleadosConElSalarioMásBajoDeSuPuesto(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.obtenerEmpleadosConElSalarioMásBajoDeSuPuesto(pageable);
+		
+	}
+	
+//	74. Mostrar los departamentos cuyo salario promedio supera el salario promedio de todos los departamentos.
 //	@GetMapping("/consulta74")
-//	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
+//	public Page<Consulta74> mostrarDepartamentosCuyoSalarioPromedioSuperaAlSalarioPromedioDeLosDemasDepartamentos(@PageableDefault(size=10) Pageable pageable){
 //		
-//		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
+//		return this.departamentoRepository.mostrarDepartamentosCuyoSalarioPromedioSuperaAlSalarioPromedioDeLosDemasDepartamentos(pageable);
+//		
+//	}
+	
+//	75. Obtener empleados que trabajan en departamentos ubicados en países sin empleados asignados.
+	@GetMapping("/consulta75")
+	public Page<Consulta47> obatenerEmpleadosTrabajanEnDepartamentosEnPaises(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
+		
+	}
+	
+//	76. Listar empleados con el salario más alto en su país.
+	@GetMapping("/consulta76")
+	public Page<Consulta76> listarEmpleadosConSalarioMasAltoDeSuPais(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.listarEmpleadosConSalarioMasAltoDeSuPais(pageable);
+		
+	}
+	
+//	77. Mostrar empleados contratados después de la fecha de contratación de su gerente.
+	@GetMapping("/consulta77")
+	public Page<Consulta76> mostrarEmpleadosContratadosDespuesDeSuGerente(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.mostrarEmpleadosContratadosDespuesDeSuGerente(pageable);
+		
+	}
+	
+//	78. Obtener departamentos con más empleados que el departamento "Ventas".
+//	@GetMapping("/consulta78")
+//	public Page<Consulta76> listarEmpleadosConSalarioMasAltoDeSuPais(@PageableDefault(size=10) Pageable pageable){
+//		
+//		return this.empleadosRepository.listarEmpleadosConSalarioMasAltoDeSuPais(pageable);
 //		
 //	}
 //	
-////	75. Obtener empleados que trabajan en departamentos ubicados en países sin empleados asignados.
-//	@GetMapping("/consulta75")
-//	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
+//	79. Listar empleados con puestos cuyo salario máximo es mayor que 20000.
+//	@GetMapping("/consulta79")
+//	public Page<Consulta76> listarEmpleadosConSalarioMasAltoDeSuPais(@PageableDefault(size=10) Pageable pageable){
 //		
-//		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
+//		return this.empleadosRepository.listarEmpleadosConSalarioMasAltoDeSuPais(pageable);
 //		
 //	}
 //	
-////	76. Listar empleados con el
-//	@GetMapping("/consulta76")
-//	public Page<Consulta47> mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(@PageableDefault(size=10) Pageable pageable){
+//	80. Mostrar empleados en puestos donde ningún otro empleado ha trabajado.
+//	@GetMapping("/consulta80")
+//	public Page<Consulta76> listarEmpleadosConSalarioMasAltoDeSuPais(@PageableDefault(size=10) Pageable pageable){
 //		
-//		return this.empleadosRepository.mostrarEmpleadosAgrupadosPorPuestoConSalarioPromedioMayor6000(pageable);
+//		return this.empleadosRepository.listarEmpleadosConSalarioMasAltoDeSuPais(pageable);
 //		
 //	}
 	

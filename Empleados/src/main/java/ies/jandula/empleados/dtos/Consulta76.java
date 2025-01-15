@@ -1,5 +1,7 @@
 package ies.jandula.empleados.dtos;
 
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,11 +9,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Consulta74 {
+public class Consulta76 {
 	
-	private String nombreDepartamento;
+	private String nombreEmpleado;
+	
+	private String nombrePais;
 
-	private double nombreGerente;
+	private BigDecimal salario;
 
 	
 }

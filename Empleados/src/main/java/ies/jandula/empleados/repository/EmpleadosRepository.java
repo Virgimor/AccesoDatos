@@ -39,6 +39,7 @@ import ies.jandula.empleados.dtos.Consulta65;
 import ies.jandula.empleados.dtos.Consulta67;
 import ies.jandula.empleados.dtos.Consulta70;
 import ies.jandula.empleados.dtos.Consulta71;
+import ies.jandula.empleados.dtos.Consulta76;
 import ies.jandula.empleados.dtos.Consulta9;
 import ies.jandula.empleados.models.Empleados;
 
@@ -287,8 +288,36 @@ public interface EmpleadosRepository extends JpaRepository<Empleados, BigDecimal
 			+ "FROM Empleados e "
 			+ "JOIN e.departamentos d "
 			+ "WHERE e.salario = "
-			+ "(SELECT MAX(e2.salario) "
-			+ "FROM Empleados e2)")
+				+ "(SELECT MAX(e2.salario) "
+				+ "FROM Empleados e2 "
+				+ "WHERE e2.departamentos = d)")
 	Page<Consulta71> listarEmpleadosCuyoSarlarioMaximoDelDepartamento(Pageable pageable);
+	
+	@Query("SELECT e.nombre "
+			+ "FROM Empleados e "
+			+ "JOIN e.puestos p "
+			+ "WHERE e.salario = "
+				+ "(SELECT MIN(e2.salario) "
+				+ "FROM Empleados e2 "
+				+ "JOIN e2.puestos p2 "
+				+ "WHERE p.idPuesto = p2.idPuesto)")
+	Page<String> obtenerEmpleadosConElSalarioMásBajoDeSuPuesto(Pageable pageable);
+	
+	@Query("SELECT DISTINCT new ies.jandula.empleados.dtos.Consulta76(e.nombre, p.nombrePais, e.salario) "
+			+ "FROM Empleados e "
+			+ "JOIN e.departamentos d "
+			+ "JOIN d.ubicaciones u "
+			+ "JOIN u.paises p "
+			+ "WHERE e.salario < "
+				+ "(SELECT MAX(e2.salario) "
+				+ "FROM Empleados e2) "
+			+ "GROUP BY p.nombrePais ")
+	Page<Consulta76> listarEmpleadosConSalarioMasAltoDeSuPais(Pageable pageable);
+	
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta70(g.nombre, e.nombre, e.salario) "
+			+ "FROM Empleados e "
+			+ "JOIN e.gerente g "
+			+ "WHERE e.salario > 10000")
+	Page<Consulta70> mostrarEmpleadosContratadosDespuesDeSuGerente(Pageable pageable);
 	
 }
