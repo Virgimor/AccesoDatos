@@ -42,6 +42,11 @@ import ies.jandula.empleados.dtos.Consulta76;
 import ies.jandula.empleados.dtos.Consulta77;
 import ies.jandula.empleados.dtos.Consulta81;
 import ies.jandula.empleados.dtos.Consulta83;
+import ies.jandula.empleados.dtos.Consulta88;
+import ies.jandula.empleados.dtos.Consulta89;
+import ies.jandula.empleados.dtos.Consulta90;
+import ies.jandula.empleados.dtos.Consulta97;
+import ies.jandula.empleados.dtos.Consulta99;
 import ies.jandula.empleados.models.Empleados;
 import ies.jandula.empleados.repository.DepartamentoRepository;
 import ies.jandula.empleados.repository.EmpleadosRepository;
@@ -520,40 +525,40 @@ public class EmpeladosController {
 	}
 	
 //	88. Obtener empleados con títulos históricos diferentes al título actual.
-//	@GetMapping("/consulta88")
-//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
-//		
-//	}
-//	
+	@GetMapping("/consulta88")
+	public Page<Consulta88> obtenerEmpleadosConTitulosHistoricosDiferentesAlTituloActual(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.obtenerEmpleadosConTitulosHistoricosDiferentesAlTituloActual(pageable);
+		
+	}
+	
 //	89. Mostrar empleados cuyo salario actual es menor que el salario de algún puesto anterior.
-//	@GetMapping("/consulta89")
-//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
-//		
-//	}
-//	
+	@GetMapping("/consulta89")
+	public Page<Consulta89> mostrarEmpleadosCuyoSalarioActualEsMenorQueElSalarioDeAlgunPuestoAnterior(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.mostrarEmpleadosCuyoSalarioActualEsMenorQueElSalarioDeAlgunPuestoAnterior(pageable);
+		
+	}
+	
 //	90. Obtener la diferencia de salarios entre el puesto actual y el primer puesto ocupado.
-//	@GetMapping("/consulta90")
-//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
-//		
-//	}
-//	
+	@GetMapping("/consulta90")
+	public Page<Consulta90> obtenerDiferenciaDeSalariosEntreElPuestoActualYElPrimerPuestoOcupado(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.obtenerDiferenciaDeSalariosEntreElPuestoActualYElPrimerPuestoOcupado(pageable);
+		
+	}
+	
 //	91. Obtener empleados que han trabajado en más de 2 departamentos diferentes.
-//	@GetMapping("/consulta91")
-//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
-//		
-//	}
-//	
+	@GetMapping("/consulta91")
+	public Page<String> obtenerEmpleadosQueHanTrabajadoEnMasDe2DepartamentosDiferentes(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.obtenerEmpleadosQueHanTrabajadoEnMasDe2DepartamentosDiferentes(pageable);
+		
+	}
+	
 //	92. Mostrar empleados que han tenido más de un gerente a lo largo del tiempo.
 //	@GetMapping("/consulta92")
-//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
+//	public Page<String> mostrarEmpleadosQueHanTenidoMásDeUnGerenteALoLargoDelTiempo(@PageableDefault(size=10) Pageable pageable){
 //		
 //		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
 //		
@@ -576,30 +581,30 @@ public class EmpeladosController {
 //	}
 //	
 //	95. Mostrar empleados que hayan trabajado en puestos cuyo salario máximo es menor Que el suyo actual.
-//	@GetMapping("/consulta95")
-//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
-//		
-//	}
-//	
+	@GetMapping("/consulta95")
+	public Page<String> mostrarEmpleadosQueHayanTrabajadoEnPuestosCuyoSalarioMaximoEsMenorQueElSuyoActual(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.mostrarEmpleadosQueHayanTrabajadoEnPuestosCuyoSalarioMaximoEsMenorQueElSuyoActual(pageable);
+		
+	}
+	
 //	96. Listar empleados que han trabajado en todos los departamentos de una región.
-//	@GetMapping("/consulta96")
-//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
-//		
-//	}
-//	
+	@GetMapping("/consulta96")
+	public Page<String> listarEmpleadosQueHanTrabajadoEnTodosLosDepartamentosDeUnaRegion(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.listarEmpleadosQueHanTrabajadoEnTodosLosDepartamentosDeUnaRegion("Medio Oriente y África", pageable);
+		
+	}
+	
 //	97. Mostrar la cantidad de cambios de puesto por departamento en cada año.
-//	@GetMapping("/consulta97")
-//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
-//		
-//	}
-//	
-//	98. Obtener empleados con el salario más alto histórico registrado.
+	@GetMapping("/consulta97")
+	public Page<Consulta97> mostrarLaCantidadDeCambiosDePuestosPorDepartamentoEnCadaAnio(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.mostrarLaCantidadDeCambiosDePuestosPorDepartamentoEnCadaAnio(pageable);
+		
+	}
+	
+//	98. Obtener empleados con el salario más alto histórico registrado. NO
 //	@GetMapping("/consulta98")
 //	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
 //		
@@ -608,19 +613,20 @@ public class EmpeladosController {
 //	}
 //	
 //	99. Listar empleados con la cantidad de años trabajados en cada puesto.
-//	@GetMapping("/consulta99")
-//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
-//		
-//	}
-//	
-//	100. Mostrar empleados que hayan trabajado en más de 3 regiones distintas.
-//	@GetMapping("/consulta100")
-//	public Page<String> mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(@PageableDefault(size=10) Pageable pageable){
-//		
-//		return this.empleadosRepository.mostrarGerentesCuyosEmpleadosTienenElSalarioMaximoDeLaEmpresa(pageable);
-//		
-//	}
+	@GetMapping("/consulta99")
+	public Page<Consulta99> listarEmpleadosConLaCantidadDeAniosTrabajadosEnCadaPuesto(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.listarEmpleadosConLaCantidadDeAniosTrabajadosEnCadaPuesto(pageable);
+		
+	}
 	
+//	100. Mostrar empleados que hayan trabajado en más de 3 regiones distintas.
+	@GetMapping("/consulta100")
+	public Page<String> mostrarEmpleadosQueHayanTrabajadoEnMasDe3RegionesDistintas(@PageableDefault(size=10) Pageable pageable){
+		
+		return this.empleadosRepository.mostrarEmpleadosQueHayanTrabajadoEnMasDe3RegionesDistintas(pageable);
+		
+	}
+	
+
 }

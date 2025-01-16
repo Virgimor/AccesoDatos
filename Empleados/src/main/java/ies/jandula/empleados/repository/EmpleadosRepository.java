@@ -39,7 +39,12 @@ import ies.jandula.empleados.dtos.Consulta71;
 import ies.jandula.empleados.dtos.Consulta76;
 import ies.jandula.empleados.dtos.Consulta77;
 import ies.jandula.empleados.dtos.Consulta83;
+import ies.jandula.empleados.dtos.Consulta88;
+import ies.jandula.empleados.dtos.Consulta89;
 import ies.jandula.empleados.dtos.Consulta9;
+import ies.jandula.empleados.dtos.Consulta90;
+import ies.jandula.empleados.dtos.Consulta97;
+import ies.jandula.empleados.dtos.Consulta99;
 import ies.jandula.empleados.models.Empleados;
 
 public interface EmpleadosRepository extends JpaRepository<Empleados, BigDecimal>{
@@ -392,4 +397,77 @@ public interface EmpleadosRepository extends JpaRepository<Empleados, BigDecimal
 			+ "HAVING COUNT(hp.empleados.idEmpleado) > 1 ")
 	Page<String> listarEmpleadoConMasConMasDeUnHistorialDePuestosEnElMismoDepartamento(Pageable pageable);
 	
+	@Query("SELECT DISTINCT new ies.jandula.empleados.dtos.Consulta88(e.nombre, hp.puestos.idPuesto) "
+			+ "FROM Empleados e "
+			+ "JOIN e.listaHistorialPuestos hp "
+			+ "WHERE hp.puestos.idPuesto != e.puestos.idPuesto ")
+	Page<Consulta88> obtenerEmpleadosConTitulosHistoricosDiferentesAlTituloActual(Pageable pageable);
+	
+	@Query("SELECT DISTINCT new ies.jandula.empleados.dtos.Consulta89(e.nombre, hp.puestos.tituloPuesto, e.salario) "
+			+ "FROM Empleados e "
+			+ "JOIN e.listaHistorialPuestos hp "
+			+ "WHERE hp.puestos.idPuesto != e.puestos.idPuesto AND (e.puestos.salarioMin + e.puestos.salarioMax)/2 < (hp.puestos.salarioMin + hp.puestos.salarioMax)/2")
+	Page<Consulta89> mostrarEmpleadosCuyoSalarioActualEsMenorQueElSalarioDeAlgunPuestoAnterior(Pageable pageable);
+	
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta90(e.nombre, (e.salario - (SELECT MIN(hp.puestos.salarioMin) FROM HistorialPuestos hp WHERE hp.empleados.idEmpleado = e.idEmpleado))) "
+		    + "FROM Empleados e "
+		    + "WHERE EXISTS (SELECT hp2 FROM HistorialPuestos hp2 WHERE hp2.empleados.idEmpleado = e.idEmpleado ORDER BY hp2.historialPuestosId.fechaInicio ASC)")
+	Page<Consulta90> obtenerDiferenciaDeSalariosEntreElPuestoActualYElPrimerPuestoOcupado(Pageable pageable);
+	
+	@Query("SELECT e.nombre "
+			+ "FROM Empleados e "
+		    + "JOIN e.listaHistorialPuestos hp "
+		    + "JOIN hp.departamentos d "
+		    + "GROUP BY e.idEmpleado "
+		    + "HAVING COUNT(DISTINCT d.idDepartamento) > 2")
+	Page<String> obtenerEmpleadosQueHanTrabajadoEnMasDe2DepartamentosDiferentes(Pageable pageable);
+	
+	@Query("SELECT e.nombre "
+			+ "FROM Empleados e "
+		    + "JOIN e.listaHistorialPuestos hp "
+		    + "JOIN hp.puestos p "
+		    + "WHERE p.idPuesto = hp.puestos.idPuesto AND p.salarioMax<e.salario")
+	Page<String> mostrarEmpleadosQueHayanTrabajadoEnPuestosCuyoSalarioMaximoEsMenorQueElSuyoActual(Pageable pageable);
+	
+	@Query("SELECT e.nombre "
+		       + "FROM Empleados e "
+		       + "JOIN e.departamentos d "  
+		       + "JOIN d.ubicaciones u "	
+		       + "JOIN u.paises p "
+		       + "JOIN p.regiones r "
+		       + "WHERE r.nombreRegion = :nombreRegion "
+		       + "GROUP BY e.idEmpleado "
+		       + "HAVING COUNT(DISTINCT d.idDepartamento) = "
+		       + "(SELECT COUNT(DISTINCT d2.idDepartamento) "
+		       + " FROM Departamentos d2 "
+		       + " JOIN d2.ubicaciones u2 "
+		       + " JOIN u2.paises p2 "
+		       + " JOIN p2.regiones r2 "
+		       + " WHERE r2.nombreRegion = :nombreRegion)")
+	Page<String> listarEmpleadosQueHanTrabajadoEnTodosLosDepartamentosDeUnaRegion(String nombreRegion, Pageable pageable);
+	
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta97(d.nombreDepartamento, YEAR(hp.historialPuestosId.fechaInicio), COUNT(hp)) "
+		       + "FROM HistorialPuestos hp "
+		       + "JOIN hp.departamentos d "
+		       + "GROUP BY d.idDepartamento, YEAR(hp.historialPuestosId.fechaInicio) "
+		       + "ORDER BY d.nombreDepartamento, YEAR(hp.historialPuestosId.fechaInicio)")
+	Page<Consulta97> mostrarLaCantidadDeCambiosDePuestosPorDepartamentoEnCadaAnio(Pageable pageable);
+	
+	@Query("SELECT new ies.jandula.empleados.dtos.Consulta99(e.nombre, YEAR(hp.fechaFin) - YEAR(hp.historialPuestosId.fechaInicio)) "
+			+ "FROM Empleados e "
+		    + "JOIN e.listaHistorialPuestos hp ")
+	Page<Consulta99> listarEmpleadosConLaCantidadDeAniosTrabajadosEnCadaPuesto(Pageable pageable);
+	
+	@Query("SELECT e.nombre "
+		       + "FROM Empleados e "
+		       + "JOIN e.listaHistorialPuestos hp "
+		       + "JOIN hp.departamentos d "
+		       + "JOIN d.ubicaciones u "
+		       + "JOIN u.paises p "
+		       + "JOIN p.regiones r "
+		       + "GROUP BY e.idEmpleado "
+		       + "HAVING COUNT(DISTINCT r.idRegion) > 3")
+	Page<String> mostrarEmpleadosQueHayanTrabajadoEnMasDe3RegionesDistintas(Pageable pageable);
+
+
 }
